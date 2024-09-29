@@ -1,11 +1,7 @@
 import ProductDetal from '@components/Product/ProductDetal';
 import { ProductI } from '@interfaces/ProductI';
 
-<<<<<<< HEAD
 async function page({ params }: { params: { id: string } }) {
-=======
-async function ProductDetailPage({ params }: { params: { id: string } }) {
->>>>>>> eb18683754f797b649e2be03c3067d2c3586e059
   const res = await fetch(`http://localhost:3000/api/products/${params.id}`);
   const product: ProductI = await res.json();
 
@@ -36,8 +32,4 @@ async function ProductDetailPage({ params }: { params: { id: string } }) {
 //   }));
 // }
 
-<<<<<<< HEAD
 export default page;
-=======
-export default ProductDetailPage;
->>>>>>> eb18683754f797b649e2be03c3067d2c3586e059

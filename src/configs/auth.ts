@@ -29,13 +29,7 @@ export const authConfig: AuthOptions = {
       },
     }),
   ],
-<<<<<<< HEAD
   // pages: {
   //   signIn: '/signin',
   // },
-=======
-  pages: {
-    signIn: '/signin',
-  },
->>>>>>> eb18683754f797b649e2be03c3067d2c3586e059
 };
