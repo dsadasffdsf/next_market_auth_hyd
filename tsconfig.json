@@ -1,0 +1,44 @@
+{
+  "compilerOptions": {
+    "target": "es6", // Укажите версию JavaScript, которую хотите получить
+    "module": "commonjs", // Используйте модульную систему CommonJS
+    "esModuleInterop": true, // Включите поддержку ES модулей
+    "skipLibCheck": true, // Пропустить проверку типов библиотек
+    "forceConsistentCasingInFileNames": true, // Проверка имен файлов
+    "rootDir": "./src", // Укажите корневой каталог исходных файлов
+    "resolveJsonModule": true, // Разрешить импорт JSON модулей
+    "jsx": "preserve", // Укажите, как обрабатывать JSX
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "strict": false,
+    "noEmit": true,
+    "incremental": true,
+    "moduleResolution": "node",
+    "isolatedModules": true,
+    "baseUrl": ".",
+    "paths": {
+      "@redux/*": ["src/redux/*"], // Убедитесь, что пути начинаются с `src/`
+      "@components/*": ["src/components/*"], // Примеры дополнительных алиасов
+      "@interfaces/*": ["src/interfaces/*"],
+      "@/*": ["./src/shadcn/*"],
+      "@data/*": ["./src/data/*"],
+      "@configs/*": ["src/configs/*"],
+      "@controllers/*": ["src/controllers/*"],
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
+  },
+  "include": [
+    "src/**/*",
+    "next-env.d.ts", // Убедитесь, что ваш файл типизаций Next.js также включен
+    ".next/types/**/*.ts"
+, "auth.config.ts"  ],
+  "exclude": [
+    "node_modules",
+    ".next", // Исключите сгенерированные файлы и папки
+    "dist" // Исключите папку для скомпилированных файлов, если она используется
+  ]
+}
