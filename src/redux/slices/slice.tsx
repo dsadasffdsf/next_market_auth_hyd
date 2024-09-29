@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {
   ActionReducerMapBuilder,
   createAsyncThunk,
@@ -41,6 +42,23 @@ const initialState: InitialProduct = {
   basket: [],
   searchProducts: [],
   editProduct: null,
+=======
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import axios from 'axios';
+import { InitialProduct, ProductI } from '@interfaces/ProductI';
+
+// export const fetchProducts = createAsyncThunk<ProductI[], void>(
+//   'products/fetchProducts',
+//   async () => {
+//     const response = await axios.get('https://fakestoreapi.com/products');
+
+//     return response.data;
+//   },
+// );
+
+const initialState: InitialProduct = {
+  basket: [],
+>>>>>>> eb18683754f797b649e2be03c3067d2c3586e059
 };
 
 export const products = createSlice({
@@ -58,6 +76,7 @@ export const products = createSlice({
         state.basket.push(currentProduct);
       }
     },
+<<<<<<< HEAD
     edit: (state, action: PayloadAction<ProductI>) => {
       state.editProduct = action.payload;
     },
@@ -66,10 +85,21 @@ export const products = createSlice({
     builder.addCase(fetchSearchProduct.fulfilled, (state, action: PayloadAction<ProductI[]>) => {
       state.searchProducts = action.payload;
     });
+=======
+  },
+  extraReducers: (builder) => {
+    // builder.addCase(fetchProducts.fulfilled, (state, action) => {
+    //   state.products = action.payload;
+    // });
+>>>>>>> eb18683754f797b649e2be03c3067d2c3586e059
   },
 });
 
 // Action creators are generated for each case reducer function
+<<<<<<< HEAD
 export const { addBasket, edit } = products.actions;
+=======
+export const { addBasket } = products.actions;
+>>>>>>> eb18683754f797b649e2be03c3067d2c3586e059
 
 export default products.reducer;

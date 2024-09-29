@@ -23,7 +23,10 @@
       "@/*": ["./src/shadcn/*"],
       "@data/*": ["./src/data/*"],
       "@configs/*": ["src/configs/*"],
+<<<<<<< HEAD
       "@controllers/*": ["src/controllers/*"],
+=======
+>>>>>>> eb18683754f797b649e2be03c3067d2c3586e059
     },
     "plugins": [
       {

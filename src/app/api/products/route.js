@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const productController = require('@controllers/product-controller');
 
 // get all products
@@ -73,3 +74,13 @@ export async function POST(req, res) {
 //     });
 //   }
 // }
+=======
+import { products } from '@data/products';
+
+export async function GET() {
+  return new Response(JSON.stringify(products), {
+    status: 200,
+    headers: { 'Content-Type': 'application/json' },
+  });
+}
+>>>>>>> eb18683754f797b649e2be03c3067d2c3586e059

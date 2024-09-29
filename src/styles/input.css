@@ -45,6 +45,7 @@
     top: 0;
     transform: scale(-1) rotate(-225deg);
   }
+<<<<<<< HEAD
   .btn {
     text-transform: uppercase;
     cursor: pointer;
@@ -80,6 +81,8 @@
     background: transparent;
     padding: 0px 5px;
   }
+=======
+>>>>>>> eb18683754f797b649e2be03c3067d2c3586e059
 }
 
 @layer base {
