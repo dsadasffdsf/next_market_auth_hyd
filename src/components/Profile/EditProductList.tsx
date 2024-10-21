@@ -7,11 +7,16 @@ import { useAppDispatch, useAppSelector } from 'src/hook/rtkHook';
 import { searchFetch } from 'src/services/req';
 import EditProduct from './EditProductItem';
 import EditProductItem from './EditProductItem';
+import Link from 'next/link';
 
 const EditProductList = () => {
   const dispatch = useAppDispatch();
   const searchInput = useRef(null);
   const { searchProducts } = useAppSelector((state) => state.productsSlice);
+
+  useEffect(() => {
+    dispatch(fetchSearchProduct(searchInput.current.value));
+  }, []);
 
   const searchHandler = () => {
     dispatch(fetchSearchProduct(searchInput.current.value));
@@ -30,7 +35,9 @@ const EditProductList = () => {
           Поиск
         </button>
       </div>
-      <div className="btn !w-full text-center mt-4 shadow-md ">Создать новый продукт</div>
+      <Link href="/profile/admin/createProduct">
+        <div className="btn !w-full text-center mt-4 shadow-md ">Создать новый продукт</div>
+      </Link>
       <ul className="grid grid-cols-3 gap-4  mt-8">
         {searchProducts
           ? searchProducts.map((product) => (

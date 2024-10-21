@@ -1,4 +1,11 @@
-import { getProducts, saveProducts, updateProduct } from '@data/utilsData';
+import {
+  addFavorites,
+  deleteProduct,
+  getProducts,
+  saveProducts,
+  searchProductsByTitle,
+  updateProduct,
+} from '@data/utils-data/utils-products';
 import { v4 as uuidv4 } from 'uuid';
 
 class ProductService {
@@ -16,6 +23,14 @@ class ProductService {
       const products = await getProducts();
       products.push(newProduct);
       saveProducts(products);
+      return newProduct;
+    } catch (e) {
+      console.error(e);
+    }
+  }
+  async addFavorite(userId, productId) {
+    try {
+      await addFavorites(userId, productId);
     } catch (e) {
       console.error(e);
     }
@@ -44,8 +59,25 @@ class ProductService {
     try {
       const product = updateProduct(id, title, description, price);
 
-
       return product;
+    } catch (e) {
+      console.error(e);
+    }
+  }
+  async deleteProductById(id) {
+    try {
+      const message = deleteProduct(id);
+
+      return message;
+    } catch (e) {
+      console.error(e);
+    }
+  }
+  async searchByTitle(searchValue) {
+    try {
+      const products = await searchProductsByTitle(searchValue);
+
+      return products;
     } catch (e) {
       console.error(e);
     }

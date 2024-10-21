@@ -8,12 +8,11 @@
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-tabs": "^1.1.0",
     "@reduxjs/toolkit": "^2.1.0",
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.445.0",
     "next": "^14.2.13",
     "next-auth": "^4.24.7",
@@ -32,7 +31,8 @@
     "tailwind": "npx tailwindcss -i ./src/styles/input.css -o ./src/styles/style.css --watch",
     "build": "next build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "jest-test": "jest"
   },
   "browserslist": {
     "production": [
@@ -47,13 +47,18 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.6.1",
+    "@testing-library/react": "^16.0.1",
     "@types/jest": "^29.5.13",
+    "@types/jsonwebtoken": "^9.0.7",
     "@types/node": "^22.5.5",
     "@types/react": "^18.3.8",
     "@types/react-dom": "^18.3.0",
     "autoprefixer": "^10.4.20",
+    "jest": "^29.7.0",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.12",
+    "ts-jest": "^29.2.5",
     "typescript": "^4.9.5"
   }
 }

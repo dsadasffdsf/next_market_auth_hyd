@@ -1,4 +1,4 @@
-const productService = require('../services/product-service');
+const productService = require('../services/product-service.cjs');
 
 class ProductController {
   //   async editProduct(req, res, next) {
@@ -32,7 +32,8 @@ class ProductController {
     try {
       const body = await req.json();
       const { title, description, price } = body;
-      await productService.addProduct(title, description, price);
+      const product = await productService.addProduct(title, description, price);
+      return product;
     } catch (e) {
       console.error(e);
     }
@@ -44,6 +45,37 @@ class ProductController {
       const { title, description, price } = body;
       const product = await productService.updateProductById(id, title, description, price);
       return product;
+    } catch (e) {
+      console.error(e);
+    }
+  }
+  async deleteProductById(req, res) {
+    try {
+      const id = req.nextUrl.pathname.split('/').pop();
+      const message = await productService.deleteProductById(id);
+      return message;
+    } catch (e) {
+      console.error(e);
+    }
+  }
+  async searchByTitle(req, res) {
+    try {
+      const searchValue = req.title;
+
+      const products = await productService.searchByTitle(searchValue);
+      return products;
+    } catch (e) {
+      console.error(e);
+    }
+  }
+  async addFavorite(req, res) {
+    try {
+      const body = await req.json();
+      console.log("---------------------------");
+      
+      const { userId, productId } = body;
+       await productService.addFavorite(userId, productId);
+      // return product;
     } catch (e) {
       console.error(e);
     }

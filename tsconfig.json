@@ -23,7 +23,7 @@
       "@/*": ["./src/shadcn/*"],
       "@data/*": ["./src/data/*"],
       "@configs/*": ["src/configs/*"],
-      "@controllers/*": ["src/controllers/*"],
+      "@controllers/*": ["src/controllers/*"]
     },
     "plugins": [
       {
@@ -34,8 +34,10 @@
   "include": [
     "src/**/*",
     "next-env.d.ts", // Убедитесь, что ваш файл типизаций Next.js также включен
-    ".next/types/**/*.ts"
-, "auth.config.ts"  ],
+    ".next/types/**/*.ts",
+    "src/auth.config.ts",
+    "src/jest.setup.js",
+  ],
   "exclude": [
     "node_modules",
     ".next", // Исключите сгенерированные файлы и папки

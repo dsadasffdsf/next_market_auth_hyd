@@ -80,6 +80,38 @@
     background: transparent;
     padding: 0px 5px;
   }
+
+  .close-cross {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    opacity: 0.2;
+    cursor: pointer;
+    transition: opacity ease 0.5s;
+  }
+
+  .close-cross:hover {
+    opacity: 1;
+  }
+
+  .close-cross::before,
+  .close-cross::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    display: block;
+    width: 24px;
+    height: 3px;
+    background: #000;
+  }
+
+  .close-cross::before {
+    transform: rotate(45deg);
+  }
+
+  .close-cross::after {
+    transform: rotate(-45deg);
+  }
 }
 
 @layer base {

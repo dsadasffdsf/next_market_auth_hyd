@@ -2,7 +2,7 @@
 
 import InputForForm from '@components/HtmlElements/Input';
 import { ProductI } from '@interfaces/ProductI';
-import { postEditProduct } from '@redux/slices/slice';
+import { fetchCreateProduct, postEditProduct } from '@redux/slices/slice';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
 
@@ -10,7 +10,15 @@ import { useAppDispatch, useAppSelector } from 'src/hook/rtkHook';
 import { validationError } from 'src/utils/validator';
 import { v4 as uuidv4 } from 'uuid';
 
-const Edit = ({ product }: { product: ProductI }) => {
+const Edit = ({
+  product,
+  btnName,
+  paramKey,
+}: {
+  product?: ProductI;
+  btnName: string;
+  paramKey: string;
+}) => {
   // const { editProduct } = useAppSelector((state) => state.productsSlice);
   const dispatch = useAppDispatch();
 
@@ -66,13 +74,19 @@ const Edit = ({ product }: { product: ProductI }) => {
     // нужна проверка на наличие
     if (validTitle && validDesc && validPrice) {
       const changedProduct: ProductI = {
-        id: product.id,
         title: title,
         description: description,
         price: parseFloat(price),
       };
-      dispatch(postEditProduct(changedProduct));
-      alert('Продукт успешно изменен');
+      if (paramKey === 'edit') {
+        dispatch(postEditProduct({ ...changedProduct, id: product.id }));
+        alert('Продукт успешно изменен');
+      } else if (paramKey === 'create') {
+        console.log('Create Product - params ----------', changedProduct);
+
+        dispatch(fetchCreateProduct(changedProduct));
+        alert('Продукт успешно добавлен');
+      }
     }
   };
 
@@ -106,7 +120,7 @@ const Edit = ({ product }: { product: ProductI }) => {
           />
         </ul>
         <button type="submit" className="btn">
-          Изменить продукт
+          {btnName}
         </button>
       </form>
     </>

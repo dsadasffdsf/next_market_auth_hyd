@@ -1,10 +1,10 @@
 import path from 'path';
 import { promises as fs } from 'fs';
-// export const productsFilePath = path.join('C:\\Users\\User\\Desktop\\next_market_auth_hyd\\src\\data\\', 'products.json');
+
 export const productsFilePath = path.join(process.cwd(), 'src/data/products.json');
-//получить продукты
+
 export async function getProducts() {
-  console.log(productsFilePath);
+  // console.log(productsFilePath);
 
   const data = await fs.readFile(productsFilePath, 'utf-8');
   //   const data = 123123
@@ -39,4 +39,24 @@ export async function updateProduct(id, title, description, price) {
   await saveProducts(products);
 
   return products[productIndex];
+}
+export async function deleteProduct(id) {
+  const products = await getProducts();
+
+  const filteredProduct = products.filter((product) => {
+    return product.id != id;
+  });
+
+  await saveProducts(filteredProduct);
+  return { message: 'Продукт успешно удален' };
+}
+export async function searchProductsByTitle(searchString) {
+  const products = await getProducts(); // Получаем все продукты
+
+  // Фильтруем продукты, у которых поле title содержит searchString
+  const filteredProducts = products.filter((product) =>
+    product.title.toLowerCase().includes(searchString.toLowerCase()),
+  );
+
+  return filteredProducts; // Возвращаем отфильтрованные продукты
 }

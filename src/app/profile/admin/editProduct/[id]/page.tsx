@@ -1,6 +1,7 @@
 import Edit from '@components/Profile/Edit';
 import EditProduct from '@components/Profile/EditProductList';
 import { ProductI } from '@interfaces/ProductI';
+import { postEditProduct } from '@redux/slices/slice';
 import React from 'react';
 
 async function page({ params }: { params: { id: string } }) {
@@ -11,7 +12,8 @@ async function page({ params }: { params: { id: string } }) {
     <>
       {product ? (
         <div>
-          <Edit product={product} />
+          {/* Key нужен чтобы избежать дублирования компонента Edit ,передать ссылку на  асинхронный запрос rtk через серверный компонент нельзя  */}
+          <Edit product={product} btnName="Изменить продукт" paramKey="edit" />
         </div>
       ) : (
         <div>Loading...</div>

@@ -1,9 +1,46 @@
-const productController = require('@controllers/product-controller');
+const productController = require('@controllers/product-controller.cjs');
 
 // get all products
+// export async function GET(req, res) {
+//   try {
+//     const products = await productController.getProducts();
+//     return new Response(JSON.stringify(products), {
+//       status: 200,
+//       headers: { 'Content-Type': 'application/json' },
+//     });
+//   } catch (error) {
+//     return new Response(JSON.stringify({ error: 'Ошибка получения продуктов' }), {
+//       status: 500,
+//       headers: { 'Content-Type': 'application/json' },
+//     });
+//   }
+// }
+
 export async function GET(req, res) {
+  //http://localhost:3000/api/products?search[title]=men
   try {
-    const products = await productController.getProducts();
+    // console.log('------------------------------------------------');
+
+    const url = new URL(req.url);
+    const searchParams = url.searchParams;
+    let products = [];
+    // Получаем все условия поиска в виде объекта
+    const searchConditions = {};
+
+    // Перебираем все параметры поиска
+    for (const [key, value] of searchParams.entries()) {
+      // Пример: 'search[title]' -> 'title', 'men' -> 'men'
+      const paramKey = key.split('[')[1]?.slice(0, -1); // Извлекаем ключ
+      const paramValue = value.startsWith('*') ? value.slice(1) : value; // Убираем * если есть
+
+      searchConditions[paramKey] = paramValue; // Сохраняем в объекте
+    }
+
+    // console.log('Условия поиска:', Object.keys(searchConditions)[0]);
+    if (Object.keys(searchConditions)[0] === 'title') {
+      products = await productController.searchByTitle(searchConditions);
+    }
+
     return new Response(JSON.stringify(products), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
@@ -15,11 +52,12 @@ export async function GET(req, res) {
     });
   }
 }
+
+// add new product
 export async function POST(req, res) {
   try {
-
-    await productController.addProduct(req);
-    return new Response(JSON.stringify({ message: 'Продукт успешно добавлен' }), {
+    const product = await productController.addProduct(req);
+    return new Response(JSON.stringify({ product }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });
@@ -32,44 +70,3 @@ export async function POST(req, res) {
     });
   }
 }
-
-// Обработка POST-запроса для добавления нового продукта
-// export async function POST(request) {
-//   try {
-//     // Получаем новый продукт из тела запроса
-//     const newProduct = await request.json();
-
-//     // Простой валидационный чек (можно добавить больше проверок)
-//     if (!newProduct || !newProduct.id || !newProduct.title || !newProduct.price) {
-//       return new Response(JSON.stringify({ error: 'Неверные данные продукта' }), {
-//         status: 400,
-//         headers: { 'Content-Type': 'application/json' },
-//       });
-//     }
-
-//     // Загружаем текущие продукты
-//     const products = await getProducts();
-
-//     if (products.filter(product)) {
-//     }
-//     // Добавляем новый продукт в список
-//     products.push(newProduct);
-
-//     // Сохраняем обновленный список продуктов
-//     await saveProducts(products);
-
-//     // Возвращаем ответ с добавленным продуктом
-//     return new Response(
-//       JSON.stringify({ product: newProduct, message: 'Продукт успешно добавлен' }),
-//       {
-//         status: 201, // Статус "Created"
-//         headers: { 'Content-Type': 'application/json' },
-//       },
-//     );
-//   } catch (error) {
-//     return new Response(JSON.stringify({ error: 'Не удалось добавить продукт' }), {
-//       status: 500,
-//       headers: { 'Content-Type': 'application/json' },
-//     });
-//   }
-// }

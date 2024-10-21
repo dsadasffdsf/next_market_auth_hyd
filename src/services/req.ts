@@ -12,5 +12,3 @@ export const searchFetch = async (searchParams: string): Promise<ProductI[]> => 
     throw error;
   }
 };
-
-

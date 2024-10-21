@@ -17,23 +17,24 @@ const Header = () => {
         <Link className="cursor-pointer hover:opacity-50" href="/basket">
           Basket
         </Link>
-        <Link className="cursor-pointer hover:opacity-50" href="/auth">
-          Auth
-        </Link>
         {session?.data && (
           <Link className="cursor-pointer hover:opacity-50" href="/profile">
             Profile
           </Link>
         )}
         {session?.data ? (
-          <Link
-            className="cursor-pointer hover:opacity-50"
-            href="#"
-            onClick={() => signOut({ callbackUrl: '/' })}>
-            Log out
-          </Link>
+          <>
+            <Link
+              className="cursor-pointer hover:opacity-50"
+              href="#"
+              onClick={() => signOut({ callbackUrl: '/' })}>
+              Log out
+            </Link>
+
+            <span className="opacity-70">Username - {session.data.user.name}</span>
+          </>
         ) : (
-          <Link className="cursor-pointer hover:opacity-50" href="/api/auth/signin">
+          <Link className="cursor-pointer hover:opacity-50" href="/signin">
             google sign in
           </Link>
         )}

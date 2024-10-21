@@ -1,3 +1,4 @@
+import axios from 'axios';
 import type { NextAuthOptions } from 'next-auth';
 import { getSession } from 'next-auth/react';
 
@@ -7,19 +8,18 @@ export const authConfig: NextAuthOptions = {
   },
   providers: [], // Добавьте провайдеров позже
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
-      // Логика для проверки, можно ли пользователю войти
-      return true; // или false в зависимости от проверки
-    },
+
+
     async redirect({ url, baseUrl }) {
+      console.log('-----------------------redir');
       // Проверяем, куда редиректить
-      const isLoggedIn = !!(await getSession());
-      const isOnDashboard = url.startsWith('/dashboard');
+      const isLoggedIn = await getSession();
+      const isOnDashboard = url.startsWith('/profile');
 
       if (isOnDashboard && !isLoggedIn) {
         return '/login'; // Редирект на страницу входа
       } else if (isLoggedIn && !isOnDashboard) {
-        return '/dashboard'; // Редирект на дашборд для залогиненных пользователей
+        return '/profile'; // Редирект на дашборд для залогиненных пользователей
       }
       return baseUrl; // По умолчанию редирект на базовый URL
     },
