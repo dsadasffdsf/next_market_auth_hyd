@@ -19,13 +19,23 @@ const productController = require('@controllers/product-controller.cjs');
 export async function GET(req, res) {
   //http://localhost:3000/api/products?search[title]=men
   try {
-    // console.log('------------------------------------------------');
+    console.log('------------------------------------------------');
 
     const url = new URL(req.url);
     const searchParams = url.searchParams;
     let products = [];
+    let count = 0;
     // Получаем все условия поиска в виде объекта
     const searchConditions = {};
+
+    const limit = searchParams.get('limit') || '3';
+    const skip = searchParams.get('skip') || '0';
+
+    console.log(limit, skip);
+
+    const countRequested = searchParams.get('count');
+    // console.log(searchParams, '=---------------------=====');
+    // console.log(countRequested);
 
     // Перебираем все параметры поиска
     for (const [key, value] of searchParams.entries()) {
@@ -38,14 +48,32 @@ export async function GET(req, res) {
 
     // console.log('Условия поиска:', Object.keys(searchConditions)[0]);
     if (Object.keys(searchConditions)[0] === 'title') {
-      products = await productController.searchByTitle(searchConditions);
+      products = await productController.searchByTitle({
+        title: searchConditions.title,
+        limit,
+        skip,
+      });
+      // console.log(products, '--------------------prod');
+    }
+    if (countRequested) {
+      count = await productController.productsCount();
     }
 
-    return new Response(JSON.stringify(products), {
+    const response = { result: { products } };
+    // console.log(JSON.stringify(response, null, 2), "-----------------------------resp");
+
+    if (count) {
+      response.result.count = count;
+    }
+    // console.log(products);
+
+    return new Response(JSON.stringify(response), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });
   } catch (error) {
+    console.error();
+
     return new Response(JSON.stringify({ error: 'Ошибка получения продуктов' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
@@ -57,7 +85,10 @@ export async function GET(req, res) {
 export async function POST(req, res) {
   try {
     const product = await productController.addProduct(req);
-    return new Response(JSON.stringify({ product }), {
+
+    const response = { result: { product } }
+
+    return new Response(JSON.stringify(response), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });

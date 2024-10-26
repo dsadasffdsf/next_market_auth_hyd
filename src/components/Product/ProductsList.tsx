@@ -4,6 +4,7 @@ import Product from '@components/Product/Product';
 import { useAppDispatch, useAppSelector } from 'src/hook/rtkHook';
 import Link from 'next/link';
 import { ProductI } from '@interfaces/ProductI';
+import Pagination from '@components/Pagination';
 
 export default function ProductsList({ products }: { products: ProductI[] }) {
   // console.log(products);
@@ -17,15 +18,16 @@ export default function ProductsList({ products }: { products: ProductI[] }) {
 
   return (
     <>
-      <ul className="  space-y-8">
+      <ul className="  space-y-8 min-h-[450px]">
         {products
           ? products.map((product) => (
-              <Link key={product.id} href={`products/${product.id} `}>
-                <Product product={product} />
+              <Link key={product.id} href={`/products/${product.id} `}>
+                <Product product={product} btnTitle="Добавить в корзину" />
               </Link>
             ))
           : ''}
       </ul>
+      
     </>
   );
 }

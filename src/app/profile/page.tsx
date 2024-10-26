@@ -10,7 +10,7 @@ export default async function Page() {
   const session = await getServerSession(authConfig);
 
   
-  console.log(session);
+  // console.log(session);
   // картинка не появляется при первом рендере
   return (
     <>

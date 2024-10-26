@@ -50,13 +50,34 @@ export async function deleteProduct(id) {
   await saveProducts(filteredProduct);
   return { message: 'Продукт успешно удален' };
 }
-export async function searchProductsByTitle(searchString) {
-  const products = await getProducts(); // Получаем все продукты
+export async function searchProductsByTitle(searchString, limit, skip) {
+  try {
+    const products = await getProducts(); // Получаем все продукты
+    // console.log(products,"---------products");
 
-  // Фильтруем продукты, у которых поле title содержит searchString
-  const filteredProducts = products.filter((product) =>
-    product.title.toLowerCase().includes(searchString.toLowerCase()),
-  );
+    // Фильтруем продукты, у которых поле title содержит searchString
+    let filteredProducts = products.filter((product) =>
+      product.title.toLowerCase().includes(searchString.toLowerCase()),
+    );
+    // console.log(filteredProducts, '----------filtred');
+    // console.log(typeof Number(skip) === 'number', typeof limit === 'number', '-----------------------lim');
 
-  return filteredProducts; // Возвращаем отфильтрованные продукты
+    filteredProducts = filteredProducts.slice(Number(skip), Number(skip) + Number(limit));
+
+    console.log(filteredProducts, 'filtred------------');
+
+    return filteredProducts; // Возвращаем отфильтрованные продукты
+  } catch (e) {
+    throw new Error('Не удалось получить продукты');
+  }
+}
+export async function productsCount() {
+  try {
+    const products = await getProducts(); // Получаем все продукты
+    // console.log(products.length);
+
+    return products.length;
+  } catch (e) {
+    console.log(e);
+  }
 }

@@ -1,7 +1,6 @@
 import path from 'path';
 import { promises as fs } from 'fs';
 import { v4 as uuidv4 } from 'uuid';
-import { generateToken } from './utils-token';
 
 export const usersFilePath = path.join(process.cwd(), 'src/data/users.json');
 
@@ -15,21 +14,21 @@ export async function createUser({ email, name, password, userList }) {
   //   console.log(newId);
   console.log(name, '----------name');
 
-  const token = generateToken(newId);
   const newUser = {
     id: newId,
     email: email,
     name: name,
-    token: token,
     password: password,
     role: 'user',
+    basket: [],
   };
+
   //   console.log(newUser, '------------------');
 
   await saveUsers([...userList, newUser]);
-
   //! _password
-  const { password: _password, ...dto } = newUser;
+  const { password: _password, basket: _basket, ...dto } = newUser;
+
   return dto;
 }
 
@@ -37,24 +36,25 @@ export async function saveUsers(users) {
   await fs.writeFile(usersFilePath, JSON.stringify(users, null, 2), 'utf-8');
 }
 
-export async function authGoogle({ email, name }) {
-  const userList = await getUsers();
+// export async function authGoogle({ email, name }) {
+//   const userList = await getUsers();
 
-  //   console.log(userList,"--------------------------");
+//   //   console.log(userList,"--------------------------");
 
-  const user = userList.find((user) => {
-    return user.email === email;
-  });
-  //   console.log(user, '-----------------------');
+//   const user = userList.find((user) => {
+//     return user.email === email;
+//   });
+//   //   console.log(user, '-----------------------');
 
-  if (!user) {
-    const newUser = await createUser({ email, name });
+//   if (!user) {
+//     const newUser = await createUser({ email, name });
 
-    return newUser;
-  }
+//     return newUser;
+//   }
 
-  return user;
-}
+//   return user;
+// }
+
 export async function auth({ email, password }) {
   const userList = await getUsers();
 
@@ -76,8 +76,8 @@ export async function auth({ email, password }) {
     id: user.id,
     email: user.email,
     name: user.name,
-    token: user.token,
     role: user.role,
+    // basket: user.basket,
   };
 
   return dto;
@@ -101,7 +101,7 @@ export async function registration({ name, email, password }) {
   }
 
   const dto = await createUser({ name, email, password, userList });
-  console.log(dto, 'dto---------------');
+  // console.log(dto, 'dto---------------');
 
   return dto;
 }

@@ -8,7 +8,7 @@ export const authConfig: NextAuthOptions = {
   },
   providers: [], // Добавьте провайдеров позже
   callbacks: {
-
+//! мб тут лучше все редиректы сделать
 
     async redirect({ url, baseUrl }) {
       console.log('-----------------------redir');

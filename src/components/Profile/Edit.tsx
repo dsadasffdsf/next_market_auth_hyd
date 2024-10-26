@@ -1,5 +1,5 @@
 'use client';
-
+//! Не уверен что проверяются права администратора на сервере (при создании,изменении),надо будет проверить
 import InputForForm from '@components/HtmlElements/Input';
 import { ProductI } from '@interfaces/ProductI';
 import { fetchCreateProduct, postEditProduct } from '@redux/slices/slice';
@@ -9,7 +9,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'src/hook/rtkHook';
 import { validationError } from 'src/utils/validator';
 import { v4 as uuidv4 } from 'uuid';
-
+//! логику проверки забрать из баскет , можнообойтись без param key
 const Edit = ({
   product,
   btnName,

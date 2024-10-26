@@ -3,16 +3,30 @@
     "id": "f2132e18-4ddc-4828-8130-036e94d867ef",
     "email": "tom986075@gmail.com",
     "name": "Tom",
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImYyMTMyZTE4LTRkZGMtNDgyOC04MTMwLTAzNmU5NGQ4NjdlZiIsImlhdCI6MTcyOTMzNzkwMywiZXhwIjoxNzI5NDI0MzAzfQ.0X8kvbWGuXDH1klTRvxXN4mUhGoJ3B5VcyR5ln7Pa6o",
     "password": "12345",
-    "role": "admin"
+    "role": "admin",
+    "basket": [
+      {
+        "id": "f5d15943-7951-40a8-adbc-5df27218aa67",
+        "count": 3
+      },
+      {
+        "id": "8d1b37f1-b476-4fd7-9b23-3a9627699185",
+        "count": 1
+      }
+    ]
   },
   {
     "id": "2058025f-84e9-42cb-bcb6-6fc1bda5baf0",
     "email": "user1@gmail.com",
     "name": "user1",
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwNTgwMjVmLTg0ZTktNDJjYi1iY2I2LTZmYzFiZGE1YmFmMCIsImlhdCI6MTcyOTQ1MDQ3OCwiZXhwIjoxNzI5NTM2ODc4fQ.5DCW6PPp1gfdsJvVGeL6OBsuVoq6UAJ9qIuhheDxoOA",
     "password": "12345",
-    "role": "user"
+    "role": "user",
+    "basket": [
+      {
+        "id": "284f6bbe-c721-4f9b-8551-fabef60e6ea3",
+        "count": 2
+      }
+    ]
   }
 ]

@@ -4,7 +4,7 @@ export async function POST(req, res) {
   try {
     // const body = await req.json();
 
-    const dto = await userController.registration(req);
+    const jwt = await userController.registration(req);
 
     return new Response(JSON.stringify({ dto }), {
       status: 200,

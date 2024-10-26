@@ -1,9 +1,10 @@
 import productController from '@controllers/product-controller.cjs';
 
-export async function POST(req, res) {
+export async function GET(req, res) {
   try {
-    await productController.addFavorite(req);
-    return new Response(JSON.stringify({ message: 'Продукт успешно добавлен' }), {
+    const products = await productController.basket(req);
+    const response = { result: { products } };
+    return new Response(JSON.stringify(response), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });

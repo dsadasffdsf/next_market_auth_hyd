@@ -1,7 +1,8 @@
+import { addFavorites, basketFavorites, deleteFavorite } from '@data/utils-data/utils-favorite';
 import {
-  addFavorites,
   deleteProduct,
   getProducts,
+  productsCount,
   saveProducts,
   searchProductsByTitle,
   updateProduct,
@@ -25,14 +26,7 @@ class ProductService {
       saveProducts(products);
       return newProduct;
     } catch (e) {
-      console.error(e);
-    }
-  }
-  async addFavorite(userId, productId) {
-    try {
-      await addFavorites(userId, productId);
-    } catch (e) {
-      console.error(e);
+      throw e;
     }
   }
   async getProducts() {
@@ -41,7 +35,7 @@ class ProductService {
 
       return products;
     } catch (e) {
-      console.error(e);
+      throw e;
     }
   }
   async getProductById(id) {
@@ -52,7 +46,7 @@ class ProductService {
 
       return newProduct;
     } catch (e) {
-      console.error(e);
+      throw e;
     }
   }
   async updateProductById(id, title, description, price) {
@@ -61,7 +55,7 @@ class ProductService {
 
       return product;
     } catch (e) {
-      console.error(e);
+      throw e;
     }
   }
   async deleteProductById(id) {
@@ -70,38 +64,53 @@ class ProductService {
 
       return message;
     } catch (e) {
-      console.error(e);
+      throw e;
     }
   }
-  async searchByTitle(searchValue) {
+  async searchByTitle({ searchValue, limit, skip }) {
     try {
-      const products = await searchProductsByTitle(searchValue);
+      console.log(limit, skip);
+
+      const products = await searchProductsByTitle(searchValue, limit, skip);
 
       return products;
     } catch (e) {
-      console.error(e);
+      throw e;
     }
   }
-  //   async updatePost(_id, title, desc, status, author) {
-  //     try {
-  //       const post = await PostModel.findByIdAndUpdate(_id, {
-  //         title,
-  //         desc,
-  //         status: `${!status}`,
-  //         author,
-  //       });
-  //       return post;
-  //     } catch (e) {
-  //       console.log(e);
-  //     }
-  //   }
-  //   async removePost(_id) {
-  //     try {
-  //       const post = await PostModel.findByIdAndDelete(_id);
-  //       return post;
-  //     } catch (e) {
-  //       console.log(e);
-  //     }
-  //   }
+  async productsCount() {
+    try {
+      const count = await productsCount();
+
+      return count;
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  async addFavorite({ userId, productId, count }) {
+    try {
+      const product = await addFavorites({ userId, productId, count });
+      return product;
+    } catch (e) {
+      throw e;
+    }
+  }
+  async basket({ userId }) {
+    try {
+      const product = await basketFavorites(userId);
+      return product;
+    } catch (e) {
+      throw e;
+    }
+  }
+  async deleteFavorite({ productId, userId }) {
+    try {
+      const product = await deleteFavorite(productId, userId);
+      return product;
+    } catch (e) {
+      throw e;
+    }
+  }
 }
 module.exports = new ProductService();
