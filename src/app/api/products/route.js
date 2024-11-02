@@ -31,7 +31,7 @@ export async function GET(req, res) {
     const limit = searchParams.get('limit') || '3';
     const skip = searchParams.get('skip') || '0';
 
-    console.log(limit, skip);
+    // console.log(limit, skip);
 
     const countRequested = searchParams.get('count');
     // console.log(searchParams, '=---------------------=====');
@@ -48,23 +48,23 @@ export async function GET(req, res) {
 
     // console.log('Условия поиска:', Object.keys(searchConditions)[0]);
     if (Object.keys(searchConditions)[0] === 'title') {
-      products = await productController.searchByTitle({
+      ({ products, count } = await productController.searchByTitle({
         title: searchConditions.title,
         limit,
         skip,
-      });
+      }));
       // console.log(products, '--------------------prod');
     }
-    if (countRequested) {
-      count = await productController.productsCount();
-    }
+    // if (countRequested) {
+    //   count = await productController.productsCount();
+    // }
 
-    const response = { result: { products } };
+    const response = { result: { products, count } };
     // console.log(JSON.stringify(response, null, 2), "-----------------------------resp");
 
-    if (count) {
-      response.result.count = count;
-    }
+    // if (count) {
+    //   response.result.count = count;
+    // }
     // console.log(products);
 
     return new Response(JSON.stringify(response), {
@@ -86,7 +86,7 @@ export async function POST(req, res) {
   try {
     const product = await productController.addProduct(req);
 
-    const response = { result: { product } }
+    const response = { result: { product } };
 
     return new Response(JSON.stringify(response), {
       status: 200,

@@ -57,13 +57,13 @@ class ProductController {
 
       // console.log(req.limit);
 
-      const products = await productService.searchByTitle({
+      const productsAndCount = await productService.searchByTitle({
         searchValue,
         limit: req.limit,
         skip: req.skip,
       });
 
-      return products;
+      return productsAndCount;
     } catch (e) {
       console.log('Что-то не так');
 
@@ -94,6 +94,8 @@ class ProductController {
   }
   async basket(req, res) {
     try {
+      console.log(req,"-ressssssssssssssssssssssssss");
+      
       const user = await getToken({ req });
       // console.log(user,"------------------------");
 

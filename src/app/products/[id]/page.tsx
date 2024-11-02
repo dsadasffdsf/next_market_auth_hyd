@@ -3,7 +3,8 @@ import { ProductI } from '@interfaces/ProductI';
 
 async function page({ params }: { params: { id: string } }) {
   const res = await fetch(`http://localhost:3000/api/products/${params.id}`);
-  const product: ProductI = await res.json();
+  const data = await res.json();
+  const product: ProductI = data.result.product;
 
   if (!product) {
     return <div>Product not found</div>;

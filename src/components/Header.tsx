@@ -37,7 +37,7 @@ const Header = () => {
           </>
         ) : (
           <Link className="cursor-pointer hover:opacity-50" href="/signin">
-            google sign in
+            Sign in
           </Link>
         )}
       </nav>

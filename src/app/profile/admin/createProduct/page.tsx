@@ -1,7 +1,7 @@
 'use client';
 
 import Edit from '@components/Profile/Edit';
-import { fetchCreateProduct } from '@redux/slices/slice';
+import { postCreateProduct } from '@redux/slices/productSlice';
 import React from 'react';
 
 function page() {

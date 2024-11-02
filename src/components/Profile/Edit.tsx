@@ -2,7 +2,7 @@
 //! Не уверен что проверяются права администратора на сервере (при создании,изменении),надо будет проверить
 import InputForForm from '@components/HtmlElements/Input';
 import { ProductI } from '@interfaces/ProductI';
-import { fetchCreateProduct, postEditProduct } from '@redux/slices/slice';
+import { postCreateProduct, putEditProduct } from '@redux/slices/productSlice';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
 
@@ -79,12 +79,12 @@ const Edit = ({
         price: parseFloat(price),
       };
       if (paramKey === 'edit') {
-        dispatch(postEditProduct({ ...changedProduct, id: product.id }));
+        dispatch(putEditProduct({ ...changedProduct, id: product.id }));
         alert('Продукт успешно изменен');
       } else if (paramKey === 'create') {
         console.log('Create Product - params ----------', changedProduct);
 
-        dispatch(fetchCreateProduct(changedProduct));
+        dispatch(postCreateProduct(changedProduct));
         alert('Продукт успешно добавлен');
       }
     }
@@ -94,7 +94,7 @@ const Edit = ({
     <>
       <form
         action="#"
-        className="shadow-lg flex flex-col space-y-4"
+        className="shadow-lg flex flex-col space-y-4 p-4"
         onSubmit={changeProductHandler}>
         <ul>
           <InputForForm

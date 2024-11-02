@@ -1,9 +1,11 @@
-import { SignInForm } from '@components/SignInForm';
+import { SignInForm } from '@components/SignIn/SignInForm';
+import SignInInformationList from '@components/SignIn/SignInInformationList';
 
 export default async function Signin() {
   return (
-    <div className="stack">
+    <div className="flex items-center justify-between">
       <SignInForm />
+      <SignInInformationList/>
     </div>
   );
 }

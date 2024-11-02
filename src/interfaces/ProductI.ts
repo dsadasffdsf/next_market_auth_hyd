@@ -1,19 +1,32 @@
 export interface ProductI {
-  id?: string;
+  id: string;
   title: string;
   price: number;
   description: string;
+  count?: number;
 }
-export interface UserFavoriteProductI {
-  id?: string;
-  title: string;
-  price: number;
-  description: string;
-  count: number;
+export interface UserI {
+  id: string;
+  email: string;
+  password: string;
+  role: string;
+  basket: [{ id: string; count: number }];
 }
+// export interface UserFavoriteProductI {
+//   id?: string;
+//   title: string;
+//   price: number;
+//   description: string;
+//   count: number;
+// }
 export interface InitialProduct {
   basket: ProductI[];
   searchProducts: ProductI[];
+  totalPrice: number;
   editProduct: ProductI;
+  error: '' | null;
+}
+export interface InitialUser {
+  userList: UserI[];
   error: '' | null;
 }

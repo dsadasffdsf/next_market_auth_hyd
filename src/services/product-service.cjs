@@ -10,7 +10,7 @@ import {
 import { v4 as uuidv4 } from 'uuid';
 
 class ProductService {
-  async addProduct(title, desc, price) {
+  async addProduct(title, description, price) {
     try {
       //Какие-то проверки можно сделать , хотя бы на повтор(валидатор?)
 
@@ -18,7 +18,7 @@ class ProductService {
       const newProduct = {
         id: newId,
         title,
-        desc,
+        description,
         price,
       };
       const products = await getProducts();
@@ -58,11 +58,12 @@ class ProductService {
       throw e;
     }
   }
+  //!поправить
   async deleteProductById(id) {
     try {
-      const message = deleteProduct(id);
+      const product = deleteProduct(id);
 
-      return message;
+      return product;
     } catch (e) {
       throw e;
     }
@@ -71,9 +72,9 @@ class ProductService {
     try {
       console.log(limit, skip);
 
-      const products = await searchProductsByTitle(searchValue, limit, skip);
+      const productsAndCount = await searchProductsByTitle(searchValue, limit, skip);
 
-      return products;
+      return productsAndCount;
     } catch (e) {
       throw e;
     }

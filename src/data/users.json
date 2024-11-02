@@ -5,16 +5,7 @@
     "name": "Tom",
     "password": "12345",
     "role": "admin",
-    "basket": [
-      {
-        "id": "f5d15943-7951-40a8-adbc-5df27218aa67",
-        "count": 3
-      },
-      {
-        "id": "8d1b37f1-b476-4fd7-9b23-3a9627699185",
-        "count": 1
-      }
-    ]
+    "basket": []
   },
   {
     "id": "2058025f-84e9-42cb-bcb6-6fc1bda5baf0",
@@ -22,11 +13,6 @@
     "name": "user1",
     "password": "12345",
     "role": "user",
-    "basket": [
-      {
-        "id": "284f6bbe-c721-4f9b-8551-fabef60e6ea3",
-        "count": 2
-      }
-    ]
+    "basket": []
   }
 ]

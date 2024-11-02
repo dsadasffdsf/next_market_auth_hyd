@@ -10,7 +10,8 @@ import { getToken } from 'next-auth/jwt';
 export async function middleware(req: NextRequest) {
   // Получаем токен для проверки авторизации и ролей
   const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET || 'secret' });
-
+  // console.log(token,"token------------------------");
+  
   // Проверяем, авторизован ли пользователь
   if (!token) {
     return NextResponse.redirect(new URL('/signin', req.url));

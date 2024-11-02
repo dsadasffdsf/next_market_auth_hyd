@@ -23,5 +23,14 @@ class UserController {
       throw e;
     }
   }
+  async getUsers(req, res) {
+    try {
+      const userList = await userService.getUsers();
+      return userList;
+    } catch (e) {
+      throw e;
+    }
+  }
+
 }
 module.exports = new UserController();

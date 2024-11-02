@@ -42,13 +42,13 @@ export async function updateProduct(id, title, description, price) {
 }
 export async function deleteProduct(id) {
   const products = await getProducts();
-
+  const product = products.find((item) => item.id === id);
   const filteredProduct = products.filter((product) => {
     return product.id != id;
   });
 
   await saveProducts(filteredProduct);
-  return { message: 'Продукт успешно удален' };
+  return product;
 }
 export async function searchProductsByTitle(searchString, limit, skip) {
   try {
@@ -61,12 +61,12 @@ export async function searchProductsByTitle(searchString, limit, skip) {
     );
     // console.log(filteredProducts, '----------filtred');
     // console.log(typeof Number(skip) === 'number', typeof limit === 'number', '-----------------------lim');
-
+    const count = filteredProducts.length;
     filteredProducts = filteredProducts.slice(Number(skip), Number(skip) + Number(limit));
 
-    console.log(filteredProducts, 'filtred------------');
+    // console.log(filteredProducts, 'filtred------------');
 
-    return filteredProducts; // Возвращаем отфильтрованные продукты
+    return { products: filteredProducts, count }; // Возвращаем отфильтрованные продукты
   } catch (e) {
     throw new Error('Не удалось получить продукты');
   }

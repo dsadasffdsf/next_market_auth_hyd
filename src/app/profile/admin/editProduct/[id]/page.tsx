@@ -1,12 +1,14 @@
 import Edit from '@components/Profile/Edit';
 import EditProduct from '@components/Profile/EditProductList';
 import { ProductI } from '@interfaces/ProductI';
-import { postEditProduct } from '@redux/slices/slice';
+import { putEditProduct } from '@redux/slices/productSlice';
 import React from 'react';
 
 async function page({ params }: { params: { id: string } }) {
   const res = await fetch(`http://localhost:3000/api/products/${params.id}`);
-  const product: ProductI = await res.json();
+  const data = await res.json();
+  const product: ProductI = data.result.product;
+  // console.log(product, '------------------data');
 
   return (
     <>

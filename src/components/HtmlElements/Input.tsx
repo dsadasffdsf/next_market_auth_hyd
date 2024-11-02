@@ -19,7 +19,7 @@ const InputForForm = memo(({ title, placeholder, error, value, onChange }: Input
     <li>
       <h4>{title}</h4>
       <input
-        className="create-product_input"
+        className="create-product_input p-2 bg-slate-200 rounded-md"
         type="text"
         placeholder={placeholder}
         value={value}

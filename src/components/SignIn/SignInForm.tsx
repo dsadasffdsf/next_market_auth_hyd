@@ -7,6 +7,7 @@ import { useState, type FormEventHandler } from 'react';
 const SignInForm = () => {
   const router = useRouter();
   const [error, setError] = useState('');
+  //! Тут можно улучшить
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
 
@@ -27,11 +28,25 @@ const SignInForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="login-form">
-      <input className="bg-slate-400 p-2" type="email" name="email" required />
-      <input className="bg-slate-400 p-2" type="password" name="password" required />
-      {error && <p style={{ color: 'red' }}>{error}</p>} {/* Отображаем ошибку */}
-      <button type="submit">Sign In</button>
+    <form onSubmit={handleSubmit} className="login-form self-start flex flex-col space-y-4">
+      <input
+        className="bg-slate-200 p-2 rounded-lg"
+        type="email"
+        name="email"
+        placeholder="email"
+        required
+      />
+      <input
+        className="bg-slate-200 p-2 rounded-lg"
+        type="password"
+        name="password"
+        placeholder="password"
+        required
+      />
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      <button type="submit" className="btn bg-slate-200">
+        Sign In
+      </button>
     </form>
   );
 };

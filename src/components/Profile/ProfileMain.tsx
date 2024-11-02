@@ -18,7 +18,7 @@ const ProfileMain = ({ session }) => {
       </div>
       {session?.user?.role === 'admin' ? (
         <div className="mt-4">
-          <Link className="cursor-pointer hover:opacity-50 btn" href="profile/admin/editProduct">
+          <Link className="cursor-pointer hover:opacity-50 btn" href="profile/admin/editProduct/page/1">
             Создать/редактировать продукты
           </Link>
           {/* <div className="">Создать/редактировать продукты</div> */}

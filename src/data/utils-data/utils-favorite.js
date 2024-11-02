@@ -8,12 +8,15 @@ export async function addFavorites({ userId, productId, count }) {
     const userList = await getUsers();
     const user = userList.find((user) => user.id === userId);
     // console.log(user,"user.basket----------------------");
+    if (!user) {
+      throw new Error('Пользователь не найден');
+    }
 
     const existingProduct = user.basket.find((item) => item.id === productId);
     // console.log(isProductInBasket);
 
     if (existingProduct) {
-      existingProduct.count += count;
+      existingProduct.count = count;
     } else {
       user.basket.push({ id: productId, count });
     }
@@ -24,7 +27,9 @@ export async function addFavorites({ userId, productId, count }) {
 
     const product = productList.find((product) => product.id === productId);
 
-    return product;
+    // console.log(product, 'prrrrrrrrrroooooooooooddddddddddddddadaaaaaaaaaaaaaaaaddddddddddddddd');
+
+    return { ...product, count: count };
   } catch (e) {
     if (e.message) {
       throw e;
@@ -51,11 +56,11 @@ export async function basketFavorites(id) {
     //     if (item.id === product.id) {
     //       return {...item ,count:}
     //     }
-        
+
     //   }),
     // );
-    console.log(productsWithCount,"favoriteProducts-----------------");
-    
+    console.log(productsWithCount, 'favoriteProducts-----------------');
+
     return productsWithCount;
   } catch (e) {
     if (e.message) {
@@ -75,7 +80,7 @@ export async function deleteFavorite(productId, userId) {
     user.basket = user.basket.filter((item) => {
       console.log(item, productId);
 
-      return item != productId;
+      return item.id != productId;
     });
     console.log(user, '------------------------');
 

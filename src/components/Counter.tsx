@@ -1,5 +1,7 @@
 'use client';
+import { usePathname } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
+//! кривая логика counter особенно этот момент   setCount(count + 1); countHandler(count + 1);
 
 const Counter = ({
   countHandler,
@@ -9,6 +11,9 @@ const Counter = ({
   initialCount: number;
 }) => {
   const [count, setCount] = useState(1);
+
+  // console.log(count);
+
   useEffect(() => {
     setCount(initialCount);
   }, [initialCount]);
@@ -16,13 +21,13 @@ const Counter = ({
   const plusHandler = (e) => {
     e.preventDefault();
     setCount(count + 1);
-    countHandler(count);
+    countHandler(count + 1);
   };
   const minusHandler = (e) => {
     e.preventDefault();
     if (count > 1) {
       setCount(count - 1);
-      countHandler(count);
+      countHandler(count - 1);
     }
   };
   return (

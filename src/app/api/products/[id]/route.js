@@ -5,7 +5,8 @@ export async function GET(req, res) {
     // const body = await req.json();
 
     const product = await productController.getProductById(req);
-    return new Response(JSON.stringify(product), {
+    const response = { result: { product } };
+    return new Response(JSON.stringify(response), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });
@@ -23,8 +24,8 @@ export async function PUT(req, res) {
 
     const product = await productController.updateProductById(req);
     // console.log(product);
-
-    return new Response(JSON.stringify({ message: 'Продукт успешно обновлен', product: product }), {
+    const response = { result: { product } };
+    return new Response(JSON.stringify(response), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });
@@ -39,9 +40,9 @@ export async function DELETE(req, res) {
   try {
     // const body = await req.json();
 
-    const message = await productController.deleteProductById(req);
-
-    return new Response(JSON.stringify({ message: message }), {
+    const product = await productController.deleteProductById(req);
+    const response = { result: { product } };
+    return new Response(JSON.stringify(response), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });

@@ -1,6 +1,6 @@
 'use client';
 import { ProductI } from '@interfaces/ProductI';
-import { edit, fetchSearchProduct, postDeleteProduct } from '@redux/slices/slice';
+import { edit, getSearchProduct, fetchDeleteProduct } from '@redux/slices/productSlice';
 import Link from 'next/link';
 import React, { FC } from 'react';
 import { useDispatch } from 'react-redux';
@@ -9,8 +9,8 @@ import { useAppDispatch } from 'src/hook/rtkHook';
 const EditProductItem = ({ product }: { product: ProductI }) => {
   const dispatch = useAppDispatch();
   const deleteHandler = async () => {
-    await dispatch(postDeleteProduct(product.id));
-    dispatch(fetchSearchProduct('*'));
+    await dispatch(fetchDeleteProduct(product.id));
+    dispatch(getSearchProduct('*'));
   };
   return (
     <>

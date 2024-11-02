@@ -1,48 +1,56 @@
 'use client';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-
 import React, { useEffect, useState } from 'react';
 
-const Pagination = ({ count, page }: { count: number; page: number }) => {
-  // const router = useRouter();
-  // console.log(router);
-
+const Pagination = ({ count, page, limit }: { count: number; page: number; limit: number }) => {
   const [currentPage, setCurrentPage] = useState(0);
   useEffect(() => {
     setCurrentPage(page);
-  }, []);
-  let productPerPage = 3;
-  console.log(count);
+  }, [page]);
+  //! productPerPage
+  const productPerPage = limit;
+  const totalPage = Math.ceil(count / productPerPage);
+  const maxVisiblePages = 5; // Настройте это значение, чтобы контролировать количество отображаемых страниц
 
-  let totalPage = Math.ceil(count / productPerPage);
-  console.log(totalPage);
+  const getVisiblePages = () => {
+    const pages = [];
+    const startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+    const endPage = Math.min(totalPage, startPage + maxVisiblePages - 1);
 
-  let items = [];
-  for (let index = 0; index < totalPage; index++) {
-    items.push(index + 1);
-  }
+    if (startPage > 1) pages.push(1);
+    if (startPage > 2) pages.push('...');
+    for (let i = startPage; i <= endPage; i++) {
+      pages.push(i);
+    }
+    if (endPage < totalPage - 1) pages.push('...');
+    if (endPage < totalPage) pages.push(totalPage);
+
+    return pages;
+  };
+
   const handlePageClick = (page: number) => {
     setCurrentPage(page);
   };
-  console.log(items);
 
   return (
     <ul className="mt-8 flex space-x-4 mb-8 justify-self-center">
-      {items
-        ? items.map((item) => (
-            <Link href={`/products/page/${item}`}>
-              <li
-                key={item}
-                className={`p-4 bg-slate-200 select-none cursor-pointer hover:opacity-50 ${
-                  currentPage === item ? 'bg-slate-500' : ''
-                }`}
-                onClick={() => handlePageClick(item)}>
-                {item}
-              </li>
-            </Link>
-          ))
-        : ''}
+      {getVisiblePages().map((item, index) =>
+        typeof item === 'number' ? (
+          <Link href={`${item}`} key={index}>
+            <li
+              className={`p-4 bg-slate-200 select-none cursor-pointer hover:opacity-50 ${
+                currentPage === item ? 'bg-slate-500' : ''
+              }`}
+              onClick={() => handlePageClick(item)}>
+              {item}
+            </li>
+          </Link>
+        ) : (
+          <li key={index} className="p-4 select-none text-gray-500">
+            {item}
+          </li>
+        ),
+      )}
     </ul>
   );
 };

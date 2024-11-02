@@ -105,3 +105,4 @@ export async function registration({ name, email, password }) {
 
   return dto;
 }
+

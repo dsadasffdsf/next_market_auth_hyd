@@ -3,132 +3,162 @@
     "id": "f5d15943-7951-40a8-adbc-5df27218aa67",
     "title": "fdsfd",
     "description": "fdsfsdffdsfsdfvcxv",
-    "price": 2121212
+    "price": 700
   },
   {
     "id": "a74e178e-bd20-415d-bbd9-cfed5c9fe834",
     "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
     "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday.",
-    "price": 509.95
+    "price": 600
   },
   {
     "id": "3256e74c-4328-4060-9c1e-b73f83eb4a08",
     "title": "White Gold Plated Princess",
-    "desc": "Classic Created Wedding Engagement Solitaire Diamond Promise Ring for Her. Gifts to spoil your love more for less.",
-    "price": 222222222222222200
+    "description": "Classic Created Wedding Engagement Solitaire Diamond Promise Ring for Her. Gifts to spoil your love more for less.",
+    "price": 500
   },
   {
     "id": "94694821-e215-4291-9cad-1958a750ef71",
     "title": "White Gold Plated Princess",
-    "desc": "Classic Created Wedding Engagement Solitaire Diamond Promise Ring for Her. Gifts to spoil your love more for less.",
-    "price": 222222222222222200
+    "description": "Classic Created Wedding Engagement Solitaire Diamond Promise Ring for Her. Gifts to spoil your love more for less.",
+    "price": 400
   },
   {
     "id": "537a6db1-ca90-4b21-9d63-9e9c3aaf8f80",
     "title": "newss",
-    "desc": "Classic Created Wedding Engagement Solitaire Diamond Promise Ring for Her. Gifts to spoil your love more for less.",
-    "price": 222222222222222200
+    "description": "Classic Created Wedding Engagement Solitaire Diamond Promise Ring for Her. Gifts to spoil your love more for less.",
+    "price": 300
   },
   {
     "id": "8088636f-29d9-44d1-8240-c2652a002840",
     "title": "newsws",
-    "desc": "Classic Created Wedding Engagement Solitaire Diamond Promise Ring for Her. Gifts to spoil your love more for less.",
-    "price": 222222222222222200
+    "description": "Classic Created Wedding Engagement Solitaire Diamond Promise Ring for Her. Gifts to spoil your love more for less.",
+    "price": 200
   },
   {
     "id": "284f6bbe-c721-4f9b-8551-fabef60e6ea3",
     "title": "321ewqeqweqw",
-    "desc": "eqweqweqweqweqwe",
-    "price": 23123
+    "description": "eqweqweqweqweqwe",
+    "price": 1000
   },
   {
     "id": "a47d9c67-8ab5-4e4f-9c2a-3a2b7a971aba",
     "title": "Classic Band",
-    "desc": "Elegant wedding band made of premium platinum for a lifetime of commitment.",
-    "price": 5000000
+    "description": "Elegant wedding band made of premium platinum for a lifetime of commitment.",
+    "price": 5000
   },
   {
     "id": "e64fd08a-b7b4-423e-9d35-45df1b1c59b5",
     "title": "Sapphire Halo",
-    "desc": "A stunning sapphire ring with a sparkling halo, perfect for special occasions.",
-    "price": 850000
+    "description": "A stunning sapphire ring with a sparkling halo, perfect for special occasions.",
+    "price": 850
   },
   {
     "id": "3f7c6b9e-57c9-4b92-836d-d90f9e25b7f0",
     "title": "Rose Gold Delight",
-    "desc": "Rose gold ring with a brilliant diamond centerpiece, timeless elegance.",
-    "price": 1200000
+    "description": "Rose gold ring with a brilliant diamond centerpiece, timeless elegance.",
+    "price": 1200
   },
   {
     "id": "b3c8e0d1-2e98-4df4-8292-9356f3d05812",
     "title": "Eternity Band",
-    "desc": "An eternity ring with diamonds encircling the band, symbolizing endless love.",
-    "price": 1800000
+    "description": "An eternity ring with diamonds encircling the band, symbolizing endless love.",
+    "price": 1800
   },
   {
     "id": "57c8a6ed-dba7-42f5-8d84-67b68e4bf430",
     "title": "Vintage Pearl",
-    "desc": "Vintage-inspired ring with a cultured pearl in a delicately designed band.",
-    "price": 300000
+    "description": "Vintage-inspired ring with a cultured pearl in a delicately designed band.",
+    "price": 300
   },
   {
     "id": "8ef88f6b-4f2a-4e4a-a7b2-6f4e57a1b6a9",
     "title": "Diamond Solitaire",
-    "desc": "Solitaire diamond ring for a simple, yet dazzling proposal.",
-    "price": 450000
+    "description": "Solitaire diamond ring for a simple, yet dazzling proposal.",
+    "price": 450
   },
   {
     "id": "e4a6cb3d-bf13-4825-b7a1-f82b964e7f84",
     "title": "Emerald Cut",
-    "desc": "Luxurious emerald-cut diamond ring in a sleek platinum band.",
-    "price": 750000
+    "description": "Luxurious emerald-cut diamond ring in a sleek platinum band.",
+    "price": 750
   },
   {
     "id": "fc3d6c1b-63b4-4baf-8f1c-98dbdb8720b5",
     "title": "Gold Knot Ring",
-    "desc": "A delicate gold ring with a knot design, symbolizing unbreakable bonds.",
-    "price": 280000
+    "description": "A delicate gold ring with a knot design, symbolizing unbreakable bonds.",
+    "price": 280
   },
   {
     "id": "8d1b37f1-b476-4fd7-9b23-3a9627699185",
     "title": "Heart of Sapphire",
-    "desc": "Heart-shaped sapphire ring surrounded by diamonds, a romantic gift.",
-    "price": 500000
+    "description": "Heart-shaped sapphire ring surrounded by diamonds, a romantic gift.",
+    "price": 500
   },
   {
     "id": "b785a0d3-ccdf-44a6-9115-7e2c0a6e68d2",
     "title": "Opal Dream",
-    "desc": "Elegant opal ring with a twist design, perfect for unique style.",
-    "price": 210000
+    "description": "Elegant opal ring with a twist design, perfect for unique style.",
+    "price": 210
   },
   {
     "id": "0f7c2b5f-b7d7-4b6e-b828-ef9b34f5f7cd",
     "title": "Topaz Shine",
-    "desc": "A vibrant topaz ring set in white gold for a modern look.",
-    "price": 325000
+    "description": "A vibrant topaz ring set in white gold for a modern look.",
+    "price": 325
   },
   {
     "id": "c6a8c9d4-e9a6-4e4b-8588-97f3d4a5c4f3",
     "title": "Diamond Cluster",
-    "desc": "Clustered diamond ring for an eye-catching sparkle.",
-    "price": 900000
+    "description": "Clustered diamond ring for an eye-catching sparkle.",
+    "price": 900
   },
   {
     "id": "4c8f1e7a-62db-4b7b-a6c4-1b5a9d5a4c84",
     "title": "Moonstone Twist",
-    "desc": "Mystical moonstone ring with a modern twist design, great for any occasion.",
-    "price": 400000
+    "description": "Mystical moonstone ring with a modern twist design, great for any occasion.",
+    "price": 400
   },
   {
     "id": "5b6d7e9f-df5f-47bf-b8f6-cd3a2f2d8d5e",
     "title": "Classic Gold Band",
-    "desc": "Simple yet elegant, this gold band is perfect for both him and her.",
-    "price": 150000
+    "description": "Simple yet elegant, this gold band is perfect for both him and her.",
+    "price": 150
   },
   {
     "id": "9a4e7b91-4f78-4c2b-93e3-0b5f57f8e2c3",
     "title": "Ruby Radiance",
-    "desc": "A luxurious ruby ring set in yellow gold, exuding elegance and passion. Perfect for memorable occasions.",
-    "price": 680000
+    "description": "A luxurious ruby ring set in yellow gold, exuding elegance and passion. Perfect for memorable occasions.",
+    "price": 680
+  },
+  {
+    "id": "b5a32ff5-8f79-4b1c-b2a6-517a8cb891e0",
+    "title": "Updated Product",
+    "description": "Updated Description",
+    "price": 99999
+  },
+  {
+    "id": "30bfea5e-efd0-4e2d-a76e-085a3bcf96b4",
+    "title": "Updated Product",
+    "description": "Updated Description",
+    "price": 99999
+  },
+  {
+    "id": "35841c6e-0e62-4928-a579-7f0cd3839698",
+    "title": "Updated Product",
+    "description": "Updated Description",
+    "price": 99999
+  },
+  {
+    "id": "17d2eef5-cb50-4e01-8fab-e0342aa3bf34",
+    "title": "Updated Product",
+    "description": "Updated Description",
+    "price": 99999
+  },
+  {
+    "id": "6be6f796-0cfd-4066-8bc3-f3d62262ac9d",
+    "title": "Updated Product",
+    "description": "Updated Description",
+    "price": 99999
   }
 ]

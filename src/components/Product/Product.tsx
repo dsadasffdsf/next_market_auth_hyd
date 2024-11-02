@@ -2,7 +2,7 @@
 
 import Counter from '@components/Counter';
 import { ProductI } from '@interfaces/ProductI';
-import { fetchAddFavoriteProduct, fetchDelFavoriteProduct } from '@redux/slices/slice';
+import { putAddFavoriteProduct, fetchDelFavoriteProduct } from '@redux/slices/productSlice';
 import { getSession } from 'next-auth/react';
 import { usePathname, useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
@@ -11,22 +11,34 @@ import { useAppDispatch } from 'src/hook/rtkHook';
 const Product = ({ product, btnTitle }: { product: ProductI; btnTitle: string }) => {
   const { id, title, description, price } = product;
   const pathname = usePathname();
-  console.log(pathname.split('/')[1]);
-
-  
+  // console.log(pathname.split('/')[1]);
 
   const [error, setError] = useState('');
   const dispatch = useAppDispatch();
   const [count, setCount] = useState(1);
+
+  useEffect(() => {
+    if (product.count) {
+      setCount(product.count);
+    } else {
+      setCount(1);
+    }
+  }, []);
+
   const countHandler = (count: number) => {
     setCount(count);
+    if (pathname.split('/')[1] === 'basket') {
+      console.log(count, 'coooooooount---------');
+
+      dispatch(putAddFavoriteProduct({ productId: id, count }));
+    }
   };
   const favoriteHandler = async (e) => {
     e.preventDefault();
     const session = await getSession();
     if (session) {
       if (pathname.split('/')[1] === 'products') {
-        dispatch(fetchAddFavoriteProduct({ productId: id, count }));
+        dispatch(putAddFavoriteProduct({ productId: id, count }));
       } else if (pathname.split('/')[1] === 'basket') {
         dispatch(fetchDelFavoriteProduct(id));
       }

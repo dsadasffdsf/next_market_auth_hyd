@@ -1,4 +1,4 @@
-const { authGoogle, auth, registration } = require('@data/utils-data/utils-users');
+const { authGoogle, auth, registration, getUsers } = require('@data/utils-data/utils-users');
 
 class UserService {
   async authByGoogle({ email, name }) {
@@ -21,6 +21,14 @@ class UserService {
     try {
       const dto = await registration({ name, email, password });
       return dto;
+    } catch (e) {
+      throw e;
+    }
+  }
+  async getUsers() {
+    try {
+      const userList = await getUsers();
+      return userList;
     } catch (e) {
       throw e;
     }
