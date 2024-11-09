@@ -16,7 +16,7 @@ const InputForForm = memo(({ type, placeholder, value, validHandler }: InputForF
     validHandler({ value: inputRef.current.value, valid });
   }, [validHandler]);
 
-  console.log('rerender');
+  // console.log('rerender');
 
   return (
     <li className="h-24">

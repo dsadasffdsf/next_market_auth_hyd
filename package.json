@@ -1,4 +1,5 @@
 {
+  "homepage": "https://dsadasffdsf.github.io/next_market_auth_hyd",
   "name": "sample",
   "version": "0.1.0",
   "private": true,
@@ -13,6 +14,7 @@
     "axios": "^1.7.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "gh-pages": "^6.2.0",
     "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.445.0",
@@ -29,6 +31,8 @@
   },
   "scripts": {
     "dev": "next dev",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "tailwind": "npx tailwindcss -i ./src/styles/input.css -o ./src/styles/style.css --watch",
     "build": "next build",
     "test": "react-scripts test",
