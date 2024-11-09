@@ -42,7 +42,7 @@ export const authConfig: AuthOptions = {
       async authorize(credentials): Promise<Dto | null> {
         if (!credentials?.email || !credentials.password) return null;
         try {
-          const res = await axios.post(`http://localhost:3000/api/users/sign`, {
+          const res = await axios.post(`${process.env.NEXTAUTH_URL}/api/users/sign`, {
             email: credentials.email,
             password: credentials.password,
           });
@@ -86,8 +86,8 @@ export const authConfig: AuthOptions = {
       // Добавляем данные из токена в сессию
       session.user.id = token.id as string;
       session.user.email = token.email as string;
-      session.user.role = token.role as string; 
-      // session.user.basket = token.basket as string[]; 
+      session.user.role = token.role as string;
+      // session.user.basket = token.basket as string[];
       return session;
     },
   },

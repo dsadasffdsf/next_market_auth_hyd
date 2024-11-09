@@ -9,7 +9,7 @@ interface ApiRequestParams {
 }
 
 const api = axios.create({
-  baseURL: 'http://localhost:3000/api',
+  baseURL: `${process.env.NEXTAUTH_URL}/api`,
 });
 
 export const apiRequest = async <T>({

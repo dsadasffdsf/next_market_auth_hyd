@@ -17,7 +17,7 @@ export default async function Products({ params, searchParams }) {
   // const page = parseInt(router.query.page)
 
   const res = await fetch(
-    `http://localhost:3000/api/products?search[title]=${searchQuery}&count=true&limit=${limit}&skip=${skip}`,
+    `${process.env.NEXTAUTH_URL}/api/products?search[title]=${searchQuery}&count=true&limit=${limit}&skip=${skip}`,
   );
   const result = await res.json();
 

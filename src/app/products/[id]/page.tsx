@@ -2,7 +2,8 @@ import ProductDetal from '@components/Product/ProductDetal';
 import { ProductI } from '@interfaces/ProductI';
 
 async function page({ params }: { params: { id: string } }) {
-  const res = await fetch(`http://localhost:3000/api/products/${params.id}`);
+  // Используем переменную окружения для API URL
+  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/products/${params.id}`);
   const data = await res.json();
   const product: ProductI = data.result.product;
 
@@ -22,15 +23,5 @@ async function page({ params }: { params: { id: string } }) {
     </>
   );
 }
-
-// export async function generateStaticParams() {
-//   const res = await fetch('http://localhost:3000/api/products');
-//   const products: ProductI[] = await res.json();
-
-//   // Генерируем параметры для каждого продукта на этапе сборки
-//   return products.map((product) => ({
-//     id: product.id.toString(),
-//   }));
-// }
 
 export default page;

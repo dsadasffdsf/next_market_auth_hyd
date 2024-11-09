@@ -17,7 +17,7 @@ const productController = require('@controllers/product-controller.cjs');
 // }
 
 export async function GET(req, res) {
-  //http://localhost:3000/api/products?search[title]=men
+  //${process.env.NEXTAUTH_URL}/api/products?search[title]=men
   try {
     console.log('------------------------------------------------');
 
