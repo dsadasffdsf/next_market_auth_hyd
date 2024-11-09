@@ -5,7 +5,7 @@ import { putEditProduct } from '@redux/slices/productSlice';
 import React from 'react';
 
 async function page({ params }: { params: { id: string } }) {
-  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/products/${params.id}`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products/${params.id}`);
   const data = await res.json();
   const product: ProductI = data.result.product;
   // console.log(product, '------------------data');

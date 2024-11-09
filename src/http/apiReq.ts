@@ -9,8 +9,9 @@ interface ApiRequestParams {
 }
 
 const api = axios.create({
-  baseURL: `${process.env.NEXTAUTH_URL}/api`,
+  baseURL: `${process.env.NEXT_PUBLIC_API_URL}/api`,
 });
+console.log(api, 'api-------------------');
 
 export const apiRequest = async <T>({
   url,
