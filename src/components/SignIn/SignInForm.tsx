@@ -2,11 +2,14 @@
 
 import { useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
-import { useState, type FormEventHandler } from 'react';
+import { useEffect, useState, type FormEventHandler } from 'react';
+import { useAppDispatch } from 'src/hook/rtkHook';
+import { resetProductError } from '@redux/slices/productSlice';
 
 const SignInForm = () => {
   const router = useRouter();
   const [error, setError] = useState('');
+
   //! Тут можно улучшить
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();

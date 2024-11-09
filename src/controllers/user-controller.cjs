@@ -1,3 +1,4 @@
+const { getToken } = require('next-auth/jwt');
 const userService = require('../services/user-service.cjs');
 
 class UserController {
@@ -23,6 +24,21 @@ class UserController {
       throw e;
     }
   }
+
+  async remove(req, res) {
+    try {
+      const id = req.nextUrl.pathname.split('/').pop();
+      const user = await getToken({ req });
+      // console.log(user, '-------------user');
+      // console.log(id, '-------------id');
+
+      const dto = await userService.remove({ role: user.role, id });
+      return dto;
+    } catch (e) {
+      throw e;
+    }
+  }
+
   async getUsers(req, res) {
     try {
       const userList = await userService.getUsers();
@@ -31,6 +47,5 @@ class UserController {
       throw e;
     }
   }
-
 }
 module.exports = new UserController();

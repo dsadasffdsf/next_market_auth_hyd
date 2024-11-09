@@ -1,46 +1,3 @@
-// interface ValidationError {
-//   username: string;
-//   password: string;
-//   setUsernameError: React.Dispatch<React.SetStateAction<string>>;
-//   setPasswordError: React.Dispatch<React.SetStateAction<string>>;
-// }
-
-// export const validationError = ({
-//   username,
-//   password,
-//   setUsernameError,
-//   setPasswordError,
-// }: ValidationError) => {
-//   let validateForm = { valUsername: true, valPassword: true };
-
-//   const usernameRegex = /^[a-zA-Z0-9._-]{3,}$/; // Минимум 3 символа
-//   const passwordRegex = /^.{6,}$/; // Минимум 6 символов
-
-//   if (!username) {
-//     validateForm.valUsername = false;
-//     setUsernameError('Поле username не должно быть пустым!');
-//   } else if (!usernameRegex.test(username)) {
-//     validateForm.valUsername = false;
-//     setUsernameError('Поле username должно содержать минимум 3 символа!');
-//   } else {
-//     validateForm.valUsername = true;
-//     setUsernameError('');
-//   }
-
-//   if (!password) {
-//     validateForm.valPassword = false;
-//     setPasswordError('Поле password не должно быть пустым!');
-//   } else if (!passwordRegex.test(password)) {
-//     validateForm.valPassword = false;
-//     setPasswordError('Поле password должно содержать минимум 6 символов!');
-//   } else {
-//     validateForm.valPassword = true;
-//     setPasswordError('');
-//   }
-
-//   return { validateForm };
-// };
-
 export interface ValidationError {
   data: string;
   setDataError: React.Dispatch<React.SetStateAction<string>>;
@@ -96,7 +53,7 @@ export const validationError = ({ data, setDataError, type }: ValidationError): 
   }
 
   if (type === 'username') {
-    const regex = /^.{5,}$/;
+    const regex = /^.{3,}$/;
     if (!data) {
       valid = false;
       setDataError('Поле data не должно быть пустым!');
@@ -107,16 +64,37 @@ export const validationError = ({ data, setDataError, type }: ValidationError): 
       valid = true;
       setDataError('');
     }
-    //проверить на повтор
+    //!проверить на повтор
+  }
+  // Проверка для поля 'email'
+  if (type === 'email') {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!data) {
+      valid = false;
+      setDataError('Поле email не должно быть пустым!');
+    } else if (!regex.test(data)) {
+      valid = false;
+      setDataError('Введите корректный email!');
+    } else {
+      valid = true;
+      setDataError('');
+    }
+  }
+
+  // Проверка для поля 'password'
+  if (type === 'password') {
+    const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$/; // Мин. 8 символов, хотя бы одна буква и одна цифра
+    if (!data) {
+      valid = false;
+      setDataError('Поле password не должно быть пустым!');
+    } else if (!regex.test(data)) {
+      valid = false;
+      setDataError('Пароль должен содержать минимум 5 символов, включая буквы и цифры!');
+    } else {
+      valid = true;
+      setDataError('');
+    }
   }
 
   return valid;
 };
-
-// const data = validationError({ data: 'Яблоко', setData, regex: titleRegex, type: 'title' });
-// const data2 = validationError({
-//   data: 'dsfsdfdавыаыsfsdfdsf',
-//   setData,
-//   regex: descRegex,
-//   type: 'desc',
-// });

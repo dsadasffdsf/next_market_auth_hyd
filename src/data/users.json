@@ -5,7 +5,12 @@
     "name": "Tom",
     "password": "12345",
     "role": "admin",
-    "basket": []
+    "basket": [
+      {
+        "id": "f5d15943-7951-40a8-adbc-5df27218aa67",
+        "count": 1
+      }
+    ]
   },
   {
     "id": "2058025f-84e9-42cb-bcb6-6fc1bda5baf0",
@@ -13,6 +18,11 @@
     "name": "user1",
     "password": "12345",
     "role": "user",
-    "basket": []
+    "basket": [
+      {
+        "id": "f5d15943-7951-40a8-adbc-5df27218aa67",
+        "count": 1
+      }
+    ]
   }
 ]

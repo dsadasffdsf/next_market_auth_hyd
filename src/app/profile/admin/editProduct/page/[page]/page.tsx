@@ -4,10 +4,9 @@ import EditProductList from '@components/Profile/EditProductList';
 import Search from '@components/Search';
 import { ProductI } from '@interfaces/ProductI';
 
-
 //! Нужно добавить продуктам order или тип того для отображения порядка? и count научиться выводить для пагинации
 //! При жесткой перезагрузке - ломается , сделать search опциональным
-export default async function Products({ params ,searchParams}) {
+export default async function Products({ params, searchParams }) {
   const searchQuery = searchParams.search || '*';
   // const page = parseInt(context?.params?.page);
   // console.log(params,'---------------------');
@@ -32,7 +31,7 @@ export default async function Products({ params ,searchParams}) {
     <>
       <Search />
       <EditProductList searchProducts={products} />
-      <Pagination count={count} page={page} limit={limit} />
+      <Pagination count={count} page={page} limit={limit} search={searchQuery} />
     </>
   );
 }

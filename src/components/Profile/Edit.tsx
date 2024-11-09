@@ -1,6 +1,6 @@
 'use client';
 //! Не уверен что проверяются права администратора на сервере (при создании,изменении),надо будет проверить
-import InputForForm from '@components/HtmlElements/Input';
+import InputForForm from '@components/HtmlElements/InputForForm';
 import { ProductI } from '@interfaces/ProductI';
 import { postCreateProduct, putEditProduct } from '@redux/slices/productSlice';
 import { useRouter } from 'next/router';
@@ -22,62 +22,42 @@ const Edit = ({
   // const { editProduct } = useAppSelector((state) => state.productsSlice);
   const dispatch = useAppDispatch();
 
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [price, setPrice] = useState('');
+  const [title, setTitle] = useState({ value: '', valid: false });
+  const [description, setDescription] = useState({ value: '', valid: false });
+  const [price, setPrice] = useState({ value: '', valid: false });
 
   useEffect(() => {
     if (product) {
-      setTitle(product.title);
-      setDescription(product.description);
-      setPrice(product.price.toString());
-    } else {
-      setTitle('');
-      setDescription('');
-      setPrice('');
+      setTitle({ value: product.title, valid: false });
+      setDescription({ value: product.description, valid: false });
+      setPrice({ value: product.price.toString(), valid: false });
     }
   }, []);
 
-  const titleHandler = useCallback((titleValue: string) => {
-    setTitle(titleValue);
+  const titleHandler = useCallback(({ value, valid }: { value: string; valid: boolean }) => {
+    setTitle({ value, valid });
   }, []);
-  const descriptionHandler = useCallback((descriptionValue: string) => {
-    setDescription(descriptionValue);
+  const descriptionHandler = useCallback(({ value, valid }: { value: string; valid: boolean }) => {
+    setDescription({ value, valid });
   }, []);
-  const priceHandler = useCallback((priceValue: string) => {
-    setPrice(priceValue);
+  const priceHandler = useCallback(({ value, valid }: { value: string; valid: boolean }) => {
+    setPrice({ value, valid });
   }, []);
-
-  const [titleError, setTitleError] = useState('');
-  const [descriptionError, setDescriptionError] = useState('');
-  const [priceError, setPriceError] = useState('');
 
   const changeProductHandler = (event: React.FormEvent) => {
     event.preventDefault();
-    console.log(title, description, price, '----------------');
 
-    const validTitle = validationError({
-      data: title,
-      setDataError: setTitleError,
-      type: 'title',
-    });
-    const validDesc = validationError({
-      data: description,
-      setDataError: setDescriptionError,
-      type: 'description',
-    });
-    const validPrice = validationError({
-      data: price,
-      setDataError: setPriceError,
-      type: 'price',
-    });
     // нужна проверка на наличие
-    if (validTitle && validDesc && validPrice) {
+    //+! Вот почему id опциональный
+
+    if (title.valid && description.valid && price.valid) {
       const changedProduct: ProductI = {
-        title: title,
-        description: description,
-        price: parseFloat(price),
+        title: title.value,
+        description: description.value,
+        price: parseFloat(price.value),
       };
+      // console.log(changedProduct, '------------changedProduct----------------');
+
       if (paramKey === 'edit') {
         dispatch(putEditProduct({ ...changedProduct, id: product.id }));
         alert('Продукт успешно изменен');
@@ -98,25 +78,22 @@ const Edit = ({
         onSubmit={changeProductHandler}>
         <ul>
           <InputForForm
-            title="title"
+            type="title"
             placeholder="Введите заголовок"
-            error={titleError}
             value={title}
-            onChange={titleHandler}
+            validHandler={titleHandler}
           />
           <InputForForm
-            title="description"
+            type="description"
             placeholder="Введите описание"
-            error={descriptionError}
             value={description}
-            onChange={descriptionHandler}
+            validHandler={descriptionHandler}
           />
           <InputForForm
-            title="price"
+            type="price"
             placeholder="Введите цену"
-            error={priceError}
             value={price}
-            onChange={priceHandler}
+            validHandler={priceHandler}
           />
         </ul>
         <button type="submit" className="btn">

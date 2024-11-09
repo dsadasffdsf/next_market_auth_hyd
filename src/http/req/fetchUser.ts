@@ -8,3 +8,24 @@ export const fetchGetUserListReq = async () => {
   const res = await apiRequest<{ userList: UserI[] }>({ url: '/users', method: 'get' });
   return res.userList;
 };
+
+export const fetchPostUserRegistrationReq = async (data: {
+  name: string;
+  email: string;
+  password: string;
+}) => {
+  const res = await apiRequest<{ user: UserI }>({
+    url: '/users',
+    method: 'post',
+    data,
+  });
+  return res.user;
+};
+//! разобраться с dto
+export const fetchDeleteUserReq = async (id: string) => {
+  const res = await apiRequest<{ user: UserI }>({
+    url: `/users/${id}`,
+    method: 'delete',
+  });
+  return res.user;
+};

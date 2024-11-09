@@ -1,5 +1,5 @@
 export interface ProductI {
-  id: string;
+  id?: string;
   title: string;
   price: number;
   description: string;
@@ -9,8 +9,9 @@ export interface UserI {
   id: string;
   email: string;
   password: string;
+  name: string;
   role: string;
-  basket: [{ id: string; count: number }];
+  // basket: [{ id: string; count: number }];
 }
 // export interface UserFavoriteProductI {
 //   id?: string;
@@ -24,7 +25,7 @@ export interface InitialProduct {
   searchProducts: ProductI[];
   totalPrice: number;
   editProduct: ProductI;
-  error: '' | null;
+  error: string | null;
 }
 export interface InitialUser {
   userList: UserI[];

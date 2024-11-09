@@ -47,13 +47,17 @@ export const postCreateProductReq = async (params: ProductI, bearerToken?: strin
 
 // Добавление продукта в избранное
 export const putAddFavoriteProductReq = async ({ productId, count }, bearerToken?: string) => {
-  const res = await apiRequest<{ product: ProductI }>({
-    url: `/products/${productId}/favorite`,
-    method: 'put',
-    data: { count },
-    bearerToken,
-  });
-  return res.product;
+  try {
+    const res = await apiRequest<{ product: ProductI }>({
+      url: `/products/${productId}/favorite`,
+      method: 'put',
+      data: { count },
+      bearerToken,
+    });
+    return res.product;
+  } catch (error) {
+    throw error;
+  }
 };
 
 // Удаление продукта из избранного

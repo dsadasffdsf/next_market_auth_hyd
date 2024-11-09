@@ -14,7 +14,6 @@ export default async function Page() {
   // картинка не появляется при первом рендере
   return (
     <>
-      
       <ProfileMain session={session}/>
     </>
   );

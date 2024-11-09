@@ -7,7 +7,6 @@ import {
   putAddFavoriteProductReq,
   putEditProductReq,
 } from '@http/req/fetchProduct';
-//! Если я добавил пользователю продукт ,а потом его удалил . Нужно что-то вернуть
 //! Проверить уровни доступа к запросам и добавить проверку ролей Добавлять и менять продукты может только админ
 describe('Products Tests', () => {
   let ID;

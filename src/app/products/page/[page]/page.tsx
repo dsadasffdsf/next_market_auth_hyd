@@ -30,7 +30,7 @@ export default async function Products({ params, searchParams }) {
     <>
       <Search />
       <ProductsList products={products} />
-      <Pagination count={count} page={page} limit={limit} />
+      <Pagination count={count} page={page} limit={limit} search={searchQuery} />
     </>
   );
 }

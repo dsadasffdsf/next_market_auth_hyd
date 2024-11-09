@@ -9,6 +9,7 @@ export async function getUsers() {
 
   return JSON.parse(data);
 }
+//! userList накой тут
 export async function createUser({ email, name, password, userList }) {
   const newId = uuidv4();
   //   console.log(newId);
@@ -75,6 +76,7 @@ export async function auth({ email, password }) {
   const dto = {
     id: user.id,
     email: user.email,
+    password: user.password,
     name: user.name,
     role: user.role,
     // basket: user.basket,
@@ -105,4 +107,20 @@ export async function registration({ name, email, password }) {
 
   return dto;
 }
+//! Отработать проброс ошибок
+export async function remove({ role, id }) {
+  if (role != 'admin') {
+    throw new Error('Недостаточно прав для удаления пользователя');
+  }
+  const userList = await getUsers();
 
+  const user = userList.find((user) => user.id === id);
+  if (user.role === 'admin') {
+    throw new Error('Нельзя удалить администратора');
+  }
+  const filteredUser = userList.filter((user) => user.id != id);
+
+  await saveUsers(filteredUser);
+  // const { password: _password, basket: _basket, ...dto } = user;
+  return user;
+}

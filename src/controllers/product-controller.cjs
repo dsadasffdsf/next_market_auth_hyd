@@ -43,8 +43,8 @@ class ProductController {
   async deleteProductById(req, res) {
     try {
       const id = req.nextUrl.pathname.split('/').pop();
-      const message = await productService.deleteProductById(id);
-      return message;
+      const product = await productService.deleteProductById(id);
+      return product;
     } catch (e) {
       throw e;
     }
@@ -83,10 +83,15 @@ class ProductController {
     try {
       const id = req.nextUrl.pathname.split('/')[3];
       const user = await getToken({ req });
-      const body = await req.json();
-      const {count} = body
 
-      const product = await productService.addFavorite({ userId: user.id, productId: id ,count });
+      
+      if (!user) {
+        throw new Error('Чтобы добавить продукты в корзину,необходимо авторизоваться');
+      }
+      const body = await req.json();
+      const { count } = body;
+
+      const product = await productService.addFavorite({ userId: user.id, productId: id, count });
       return product;
     } catch (e) {
       throw e;
@@ -94,8 +99,8 @@ class ProductController {
   }
   async basket(req, res) {
     try {
-      console.log(req,"-ressssssssssssssssssssssssss");
-      
+      // console.log(req,"-ressssssssssssssssssssssssss");
+
       const user = await getToken({ req });
       // console.log(user,"------------------------");
 

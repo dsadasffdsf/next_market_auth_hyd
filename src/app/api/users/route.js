@@ -4,9 +4,9 @@ export async function POST(req, res) {
   try {
     // const body = await req.json();
 
-    const jwt = await userController.registration(req);
-
-    return new Response(JSON.stringify({ dto }), {
+    const user = await userController.registration(req);
+    const response = { result: { user } };
+    return new Response(JSON.stringify(response), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });

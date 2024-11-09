@@ -24,7 +24,9 @@ export async function PUT(req, res) {
 
     const product = await productController.updateProductById(req);
     // console.log(product);
+
     const response = { result: { product } };
+
     return new Response(JSON.stringify(response), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },

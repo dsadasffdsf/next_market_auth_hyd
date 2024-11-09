@@ -1,4 +1,5 @@
 'use client';
+import SignInInformationList from '@components/SignIn/SignInInformationList';
 import Link from 'next/link';
 import React, { useEffect } from 'react';
 
@@ -17,14 +18,18 @@ const ProfileMain = ({ session }) => {
         {session?.user?.image && <img src={session.user.image} alt="" />}
       </div>
       {session?.user?.role === 'admin' ? (
-        <div className="mt-4">
-          <Link className="cursor-pointer hover:opacity-50 btn" href="profile/admin/editProduct/page/1">
-            Создать/редактировать продукты
-          </Link>
+        <div className="mt-4 space-y-4 flex justify-between">
+          <span>
+            <Link
+              className="cursor-pointer hover:opacity-50 btn"
+              href="profile/admin/editProduct/page/1">
+              Создать/редактировать продукты
+            </Link>
+          </span>
           {/* <div className="">Создать/редактировать продукты</div> */}
-          <div className="btn">Повысить привилегию </div>
-          <div className="btn">Статистика покупок </div>
-          <div className="btn">Жалобы от пользователей </div>
+          <div className="">
+            <SignInInformationList />
+          </div>
         </div>
       ) : (
         <div className="mt-4">На большее прав не хватает</div>

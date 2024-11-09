@@ -12,9 +12,7 @@ export async function PUT(req, res) {
       headers: { 'Content-Type': 'application/json' },
     });
   } catch (error) {
-    console.log(error.message);
-
-    return new Response(JSON.stringify({ error: error.message }), {
+    return new Response(JSON.stringify({ message: error.message }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     });

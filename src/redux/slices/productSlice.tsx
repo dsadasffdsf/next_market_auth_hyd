@@ -20,61 +20,106 @@ import {
   fetchDelFavoriteProductReq,
 } from '@http/req/fetchProduct';
 
+// Нужен чтобы очищать поле error перед каждым запросом
+export const createAsyncThunkWithReset = <Returned, ThunkArg>(
+  type: string,
+  asyncThunk: (arg: ThunkArg, thunkAPI: any) => Promise<Returned>,
+) => {
+  return createAsyncThunk<Returned, ThunkArg>(type, async (arg, { dispatch, rejectWithValue }) => {
+    dispatch(resetProductError());
+
+    try {
+      return await asyncThunk(arg, { dispatch, rejectWithValue });
+    } catch (error) {
+      console.error(`Error in ${type}:`, error);
+      return rejectWithValue(error.response?.data?.message || 'Ошибка');
+    }
+  });
+};
+
 //<res,req>
+
 // Поиск продукта
-export const getSearchProduct = createAsyncThunk<ProductI[], string>(
+export const getSearchProduct = createAsyncThunkWithReset<ProductI[], string>(
   'products/getSearchProduct',
-  async (searchParams) => {
-    return await getSearchProductReq(searchParams);
+  async (searchParams, { rejectWithValue }) => {
+    try {
+      return await getSearchProductReq(searchParams);
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || 'Ошибка при поиске продукта');
+    }
   },
 );
 
 // Редактирование продукта
-export const putEditProduct = createAsyncThunk<ProductI, ProductI>(
+export const putEditProduct = createAsyncThunkWithReset<ProductI, ProductI>(
   'products/putEditProduct',
-  async (editParams) => {
-    return await putEditProductReq(editParams);
+  async (editParams, { rejectWithValue }) => {
+    try {
+      return await putEditProductReq(editParams);
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || 'Ошибка при редактировании продукта');
+    }
   },
 );
 
 // Удаление продукта
-//! Удаление не добавлено в клиент
-export const fetchDeleteProduct = createAsyncThunk<ProductI, string>(
+export const fetchDeleteProduct = createAsyncThunkWithReset<ProductI, string>(
   'products/fetchDeleteProduct',
-  async (id) => {
-    return await fetchDeleteProductReq(id);
+  async (id, { rejectWithValue }) => {
+    try {
+      return await fetchDeleteProductReq(id);
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || 'Ошибка при удалении продукта');
+    }
   },
 );
 
 // Создание нового продукта
-export const postCreateProduct = createAsyncThunk<ProductI, ProductI>(
+export const postCreateProduct = createAsyncThunkWithReset<ProductI, ProductI>(
   'products/postCreateProduct',
-  async (params) => {
-    return await postCreateProductReq(params);
+  async (params, { rejectWithValue }) => {
+    try {
+      return await postCreateProductReq(params);
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || 'Ошибка при создании продукта');
+    }
   },
 );
 
 // Добавление продукта в избранное
-export const putAddFavoriteProduct = createAsyncThunk<
+export const putAddFavoriteProduct = createAsyncThunkWithReset<
   ProductI,
   { productId: string; count: number }
->('products/putAddFavoriteProduct', async ({ productId, count }) => {
-  return await putAddFavoriteProductReq({ productId, count });
+>('products/putAddFavoriteProduct', async ({ productId, count }, { rejectWithValue }) => {
+  try {
+    return await putAddFavoriteProductReq({ productId, count });
+  } catch (error) {
+    return rejectWithValue(error.response?.data?.message || 'Ошибка при добавлении в избранное');
+  }
 });
 
 // Получение продуктов из корзины
-export const getBasketProducts = createAsyncThunk<ProductI[], void>(
+export const getBasketProducts = createAsyncThunkWithReset<ProductI[], void>(
   'products/getBasketProducts',
-  async () => {
-    return await getBasketProductsReq();
+  async (_, { rejectWithValue }) => {
+    try {
+      return await getBasketProductsReq();
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || 'Ошибка при получении корзины');
+    }
   },
 );
 
 // Удаление продукта из избранного
-export const fetchDelFavoriteProduct = createAsyncThunk<ProductI, string>(
+export const fetchDelFavoriteProduct = createAsyncThunkWithReset<ProductI, string>(
   'products/fetchDelFavoriteProduct',
-  async (productId) => {
-    return await fetchDelFavoriteProductReq(productId);
+  async (productId, { rejectWithValue }) => {
+    try {
+      return await fetchDelFavoriteProductReq(productId);
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || 'Ошибка при удалении из избранного');
+    }
   },
 );
 
@@ -90,17 +135,9 @@ export const products = createSlice({
   name: 'products',
   initialState,
   reducers: {
-    // addBasket: (state, action: PayloadAction<ProductI>) => {
-    //   const currentProduct = action.payload;
-    //   const rep = state.basket.some((product) => product.id === currentProduct.id);
-    //   if (rep) {
-    //     state.basket = state.basket.filter((product) => {
-    //       product.id != currentProduct.id;
-    //     });
-    //   } else {
-    //     state.basket.push(currentProduct);
-    //   }
-    // },
+    resetProductError: (state) => {
+      state.error = null;
+    },
     edit: (state, action: PayloadAction<ProductI>) => {
       state.editProduct = action.payload;
     },
@@ -162,10 +199,16 @@ export const products = createSlice({
       );
       state.totalPrice = total;
     });
+    //! any
+    builder.addCase(putAddFavoriteProduct.rejected, (state, action: PayloadAction<any>) => {
+      // const productId = action.meta.arg.productId;
+
+      state.error = action.payload;
+    });
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { edit } = products.actions;
+export const { edit, resetProductError } = products.actions;
 
 export default products.reducer;

@@ -4,11 +4,11 @@ import { getSession } from 'next-auth/react';
 
 export const authConfig: NextAuthOptions = {
   pages: {
-    signIn: '/login',
+    signIn: '/signin',
   },
   providers: [], // Добавьте провайдеров позже
   callbacks: {
-//! мб тут лучше все редиректы сделать
+    //!+ мб тут лучше все редиректы сделать -
 
     async redirect({ url, baseUrl }) {
       console.log('-----------------------redir');
@@ -17,7 +17,7 @@ export const authConfig: NextAuthOptions = {
       const isOnDashboard = url.startsWith('/profile');
 
       if (isOnDashboard && !isLoggedIn) {
-        return '/login'; // Редирект на страницу входа
+        return '/signin'; // Редирект на страницу входа
       } else if (isLoggedIn && !isOnDashboard) {
         return '/profile'; // Редирект на дашборд для залогиненных пользователей
       }

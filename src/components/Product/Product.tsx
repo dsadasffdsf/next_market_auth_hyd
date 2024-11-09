@@ -6,14 +6,14 @@ import { putAddFavoriteProduct, fetchDelFavoriteProduct } from '@redux/slices/pr
 import { getSession } from 'next-auth/react';
 import { usePathname, useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
-import { useAppDispatch } from 'src/hook/rtkHook';
+import { useAppDispatch, useAppSelector } from 'src/hook/rtkHook';
 
 const Product = ({ product, btnTitle }: { product: ProductI; btnTitle: string }) => {
   const { id, title, description, price } = product;
   const pathname = usePathname();
   // console.log(pathname.split('/')[1]);
+  const error = useAppSelector((state) => state.productsSlice.error);
 
-  const [error, setError] = useState('');
   const dispatch = useAppDispatch();
   const [count, setCount] = useState(1);
 
@@ -34,22 +34,20 @@ const Product = ({ product, btnTitle }: { product: ProductI; btnTitle: string })
     }
   };
   const favoriteHandler = async (e) => {
+    //!
     e.preventDefault();
-    const session = await getSession();
-    if (session) {
-      if (pathname.split('/')[1] === 'products') {
-        dispatch(putAddFavoriteProduct({ productId: id, count }));
-      } else if (pathname.split('/')[1] === 'basket') {
-        dispatch(fetchDelFavoriteProduct(id));
-      }
-    } else {
-      setError('Сперва авторизуйтесь');
+    // const session = await getSession();
+
+    if (pathname.split('/')[1] === 'products') {
+      dispatch(putAddFavoriteProduct({ productId: id, count }));
+    } else if (pathname.split('/')[1] === 'basket') {
+      dispatch(fetchDelFavoriteProduct(id));
     }
   };
   return (
-    <li className="shadow-md group cursor-pointer p-8 relative">
+    <li className="shadow-md group cursor-pointer p-4 relative">
       <div className="flex">
-        <div className="min-w-[70%] ">
+        <div className="min-w-[70%] min-h-[120px]">
           <div className="flex group-hover:opacity-50">
             <div>{id}.</div>
             <div className="ml-4">{title}</div>
@@ -70,9 +68,6 @@ const Product = ({ product, btnTitle }: { product: ProductI; btnTitle: string })
           <button className="bg-slate-400 hover:opacity-70" onClick={(e) => favoriteHandler(e)}>
             {btnTitle}
           </button>
-          {/* <div className="heart-container ">
-            <div className="heart" onClick={(e) => favoriteHandler(e)}></div>
-          </div> */}
         </div>
       </div>
     </li>

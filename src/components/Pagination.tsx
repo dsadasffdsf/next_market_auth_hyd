@@ -1,9 +1,21 @@
 'use client';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
-const Pagination = ({ count, page, limit }: { count: number; page: number; limit: number }) => {
+const Pagination = ({
+  count,
+  page,
+  limit,
+  search,
+}: {
+  count: number;
+  page: number;
+  limit: number;
+  search: string;
+}) => {
   const [currentPage, setCurrentPage] = useState(0);
+
   useEffect(() => {
     setCurrentPage(page);
   }, [page]);
@@ -36,7 +48,7 @@ const Pagination = ({ count, page, limit }: { count: number; page: number; limit
     <ul className="mt-8 flex space-x-4 mb-8 justify-self-center">
       {getVisiblePages().map((item, index) =>
         typeof item === 'number' ? (
-          <Link href={`${item}`} key={index}>
+          <Link href={`${item}?search=${search}`} key={index}>
             <li
               className={`p-4 bg-slate-200 select-none cursor-pointer hover:opacity-50 ${
                 currentPage === item ? 'bg-slate-500' : ''

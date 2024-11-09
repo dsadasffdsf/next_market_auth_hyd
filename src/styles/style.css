@@ -616,49 +616,6 @@ body {
   }
 }
 
-.heart-container {
-  position: relative;
-  width: 15px;
-  height: 24px;
-}
-
-.heart {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  cursor: pointer;
-  opacity: 0.2;
-  transition: opacity ease 0.5s;
-}
-
-.heart:hover {
-  opacity: 1;
-}
-
-.heart:before,
-  .heart:after {
-  content: '';
-  width: 100%;
-  height: 100%;
-  border-radius: 100px 100px 0 0;
-  position: absolute;
-  background-color: #e74c3c;
-}
-
-.heart:before {
-  left: 44%;
-  top: 0;
-  transform: scale(-1) rotate(225deg);
-}
-
-.heart:after {
-  left: 0;
-  top: 0;
-  transform: scale(-1) rotate(-225deg);
-}
-
 .btn {
   text-transform: uppercase;
   cursor: pointer;
@@ -713,10 +670,6 @@ body {
   transform: rotate(-45deg);
 }
 
-.visible {
-  visibility: visible;
-}
-
 .relative {
   position: relative;
 }
@@ -761,16 +714,24 @@ body {
   display: grid;
 }
 
-.max-h-\[300px\] {
-  max-height: 300px;
+.h-24 {
+  height: 6rem;
+}
+
+.min-h-\[100px\] {
+  min-height: 100px;
+}
+
+.min-h-\[300px\] {
+  min-height: 300px;
 }
 
 .min-h-\[450px\] {
   min-height: 450px;
 }
 
-.min-h-\[300px\] {
-  min-height: 300px;
+.min-h-\[120px\] {
+  min-height: 120px;
 }
 
 .\!w-full {
@@ -781,12 +742,20 @@ body {
   width: 30px;
 }
 
+.w-\[450px\] {
+  width: 450px;
+}
+
 .w-full {
   width: 100%;
 }
 
 .min-w-24 {
   min-width: 6rem;
+}
+
+.min-w-\[600px\] {
+  min-width: 600px;
 }
 
 .min-w-\[70\%\] {
@@ -824,6 +793,10 @@ body {
 
 .justify-between {
   justify-content: space-between;
+}
+
+.justify-items-center {
+  justify-items: center;
 }
 
 .gap-4 {
@@ -868,12 +841,20 @@ body {
   align-self: center;
 }
 
+.justify-self-end {
+  justify-self: end;
+}
+
 .justify-self-center {
   justify-self: center;
 }
 
 .rounded {
   border-radius: 0.25rem;
+}
+
+.rounded-2xl {
+  border-radius: 1rem;
 }
 
 .rounded-lg {
@@ -887,6 +868,11 @@ body {
 .bg-blue-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(59 130 246 / var(--tw-bg-opacity));
+}
+
+.bg-red-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(239 68 68 / var(--tw-bg-opacity));
 }
 
 .bg-slate-100 {
@@ -922,13 +908,14 @@ body {
   padding: 1rem;
 }
 
-.p-8 {
-  padding: 2rem;
-}
-
 .px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
+}
+
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .px-8 {
