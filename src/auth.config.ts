@@ -11,7 +11,7 @@ export const authConfig: NextAuthOptions = {
     //!+ мб тут лучше все редиректы сделать -
 
     async redirect({ url, baseUrl }) {
-      console.log('-----------------------redir');
+      // console.log('-----------------------redir');
       // Проверяем, куда редиректить
       const isLoggedIn = await getSession();
       const isOnDashboard = url.startsWith('/profile');

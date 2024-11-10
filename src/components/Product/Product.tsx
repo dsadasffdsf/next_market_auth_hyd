@@ -28,7 +28,7 @@ const Product = ({ product, btnTitle }: { product: ProductI; btnTitle: string })
   const countHandler = (count: number) => {
     setCount(count);
     if (pathname.split('/')[1] === 'basket') {
-      console.log(count, 'coooooooount---------');
+      // console.log(count, 'coooooooount---------');
 
       dispatch(putAddFavoriteProduct({ productId: id, count }));
     }

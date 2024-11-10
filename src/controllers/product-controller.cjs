@@ -65,7 +65,7 @@ class ProductController {
 
       return productsAndCount;
     } catch (e) {
-      console.log('Что-то не так');
+      // console.log('Что-то не так');
 
       throw e;
     }

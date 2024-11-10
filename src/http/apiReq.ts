@@ -11,7 +11,7 @@ interface ApiRequestParams {
 const api = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_API_URL}/api`,
 });
-console.log(api, 'api-------------------');
+// console.log(api, 'api-------------------');
 
 export const apiRequest = async <T>({
   url,
@@ -27,7 +27,7 @@ export const apiRequest = async <T>({
       headers: bearerToken ? { Authorization: `Bearer ${bearerToken}` } : {},
     };
     const response = await api.request<{ result: T }>(config);
-    console.log(response.data, 'ressssssss---------------');
+    // console.log(response.data, 'ressssssss---------------');
 
     return response.data.result;
   } catch (error) {

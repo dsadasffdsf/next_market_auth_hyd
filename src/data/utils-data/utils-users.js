@@ -86,7 +86,7 @@ export async function auth({ email, password }) {
 }
 export async function registration({ name, email, password }) {
   const userList = await getUsers();
-  console.log(name, '----------name');
+  // console.log(name, '----------name');
   //   console.log(userList,"--------------------------");
 
   const user = userList.find((user) => {

@@ -1,19 +1,27 @@
 'use client';
 
-// import { getSearchProduct } from '@redux/slices/slice';
-import React, { useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
-import { useAppDispatch } from 'src/hook/rtkHook';
-import { useRouter } from 'next/navigation';
+import React, { useEffect, useRef, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 const Search = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const searchInput = useRef(null);
 
+  const initialSearch = searchParams.get('search') === '*' ? '' : searchParams.get('search') || '';
+  const [searchValue, setSearchValue] = useState(initialSearch);
+
+  useEffect(() => {
+    if (searchInput.current) {
+      searchInput.current.value = searchValue;
+    }
+  }, [searchValue]);
+
   const handleSearch = () => {
-    // Переход на страницу с поисковым запросом в URL
-    router.push(`1?search=${searchInput.current.value}`);
+    setSearchValue(searchInput.current.value);
+    router.push(`1?search=${searchInput.current.value || '*'}`);
   };
+
   return (
     <div className="flex justify-center mb-8">
       <input
@@ -21,6 +29,7 @@ const Search = () => {
         type="text"
         placeholder="Search"
         ref={searchInput}
+        defaultValue={searchValue}
       />
       <button className="bg-slate-400 px-8 text-white" onClick={handleSearch}>
         Поиск

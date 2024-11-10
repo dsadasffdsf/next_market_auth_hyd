@@ -49,7 +49,7 @@ export const authConfig: AuthOptions = {
           // console.log(res, '--------------------');
           if (res.status === 200) {
             // const { token, id } = res.data;
-            console.log(res.data.dto, 'res.data ------------------------------');
+            // console.log(res.data.dto, 'res.data ------------------------------');
             const userData: Dto = res.data.dto;
             return userData;
           }
